@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Kilometers to Light Year Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Kilometers to Light Year with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('length_converter_index') }}" class="converter-tab-button" data-converter-type="length" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Length Home</a>
+        <a href="{{ url_for('length_specific_conversion', from_unit='light_year', to_unit='kilometers') }}" class="converter-tab-button" data-converter-type="length-lightyear-kilometers" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Light Year to Kilometers</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Kilometers:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 10" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output:</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Kilometer">Kilometer</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Light Year">Light Year</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Kilometers to Light Year Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Dive into the vastness of space with our precise Kilometers to Light Year Converter. This specialized tool is indispensable for astronomers, science enthusiasts, students, and anyone exploring cosmic distances. While kilometers are used for terrestrial measurements, light years represent astronomical distances, making this conversion crucial for understanding the immense scales of the universe. Our converter simplifies this complex calculation, providing instant and accurate results, bridging the gap between everyday metrics and astronomical units. Experience seamless conversion and gain a clearer perspective on the truly enormous distances that define our cosmos.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Kilometers and Light Years</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Kilometer?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>kilometer (km)</b> is a unit of length in the metric system, equivalent to one thousand meters. It is the most commonly used unit for expressing geographical distances on land in most parts of the world. Kilometers are fundamental for mapping, transportation, and everyday measurements in countries that have adopted the metric system. Its base-10 nature simplifies calculations and makes it an intuitive unit for large-scale distances, facilitating international communication and standardization in many practical applications.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Light Year?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>light year (ly)</b> is a unit of length used to express astronomical distances, defined as the distance light travels in one Julian year in vacuum. This equates to approximately 9.461 trillion kilometers, or about 5.879 trillion miles. The light year is predominantly used in popular science publications and by astronomers to conceptualize vast cosmic scales, making distances to stars and galaxies more relatable than expressing them in mere kilometers or miles. It serves as a fundamental measure for understanding the immense size and scope of the universe.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Kilometers to Light Years?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            The conversion from kilometers to light years, while not a daily necessity, is profoundly important in astronomy, astrophysics, and general science education for several reasons:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Conceptualizing Vastness:</b> Kilometers are too small to practically measure interstellar or intergalactic distances; converting to light years helps in grasping the immense scale of the cosmos.</li>
+                <li><b>Scientific Research:</b> Astronomers use light years (or parsecs, a related unit) for expressing distances to stars, nebulae, and galaxies in their research and publications.</li>
+                <li><b>Educational Context:</b> It helps students and the public understand how "far" a star or galaxy truly is when discussing space facts and discoveries.</li>
+                <li><b>Interpreting Data:</b> When astronomical data is presented in kilometers, converting it to light years makes it comparable to other cosmic distances.</li>
+                <li><b>Science Communication:</b> Simplifying complex distances into understandable units for documentaries, articles, and popular science books.</li>
+            </ul>
+            Our Kilometers to Light Year converter offers a simple and accurate way to perform this conversion, providing a bridge between terrestrial and cosmic scales. It helps to illustrate just how vast space is, converting 1 kilometer into an incredibly small fraction of a light year, instantly and precisely.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>

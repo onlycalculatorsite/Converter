@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Kilometers to Nautical Mile Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Kilometers to Nautical Mile with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('length_converter_index') }}" class="converter-tab-button" data-converter-type="length" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Length Home</a>
+        <a href="{{ url_for('length_specific_conversion', from_unit='nautical_mile', to_unit='kilometers') }}" class="converter-tab-button" data-converter-type="length-nautical-mile-kilometers" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Nautical Mile to Kilometers</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Kilometers:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 10" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output:</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Kilometer">Kilometer</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Nautical Mile">Nautical Mile</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Kilometers to Nautical Mile Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Navigate global distances with precision using our Kilometers to Nautical Mile Converter. This specialized tool is essential for marine, aviation, and navigation professionals, as well as students of geography and nautical science. While kilometers are used for land measurements globally, nautical miles are the standard for distances over water and in air navigation. Our converter bridges these two crucial units, providing instant and accurate results. It simplifies complex route planning, flight calculations, and maritime operations, ensuring precision whether you're charting a course across the ocean or analyzing flight paths.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Kilometers and Nautical Miles</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Kilometer?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>kilometer (km)</b> is a unit of length in the metric system, equivalent to one thousand meters. It is the most commonly used unit for expressing geographical distances on land in most parts of the world. Kilometers are fundamental for mapping, transportation, and everyday measurements in countries that have adopted the metric system. Its base-10 nature simplifies calculations and makes it an intuitive unit for large-scale distances, facilitating international communication and standardization in many practical applications.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Nautical Mile?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>nautical mile (nm or Nmi)</b> is a unit of distance used in marine and aviation navigation. It is defined as exactly 1,852 meters (or 1.852 kilometers). This unit's origin is based on the circumference of the Earth: one nautical mile is approximately equal to one minute of latitude. Its consistency with geographical coordinates makes it ideal for plotting positions and distances on charts, ensuring accuracy for ships and aircraft worldwide. The nautical mile is universally adopted for international sea and air travel, distinct from the terrestrial mile.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Kilometers to Nautical Miles?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            The conversion from kilometers to nautical miles is essential when transitioning between land-based and sea/air-based measurements. This conversion is vital for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Maritime Navigation:</b> Ship captains and navigators use nautical miles for plotting courses and measuring distances on sea charts, which are based on latitude and longitude.</li>
+                <li><b>Aviation:</b> Pilots and air traffic controllers use nautical miles for flight planning, airspeeds, and distances, as it simplifies calculations related to Earth's curvature.</li>
+                <li><b>Cartography:</b> Creating or interpreting maps that combine land and sea features, where different units might be preferred for each.</li>
+                <li><b>International Regulations:</b> Adhering to global standards in shipping and aviation, where nautical miles are universally recognized.</li>
+                <li><b>Coastal Management:</b> Measuring distances from shorelines or defining maritime boundaries where nautical miles are the legal standard.</li>
+            </ul>
+            Our Kilometers to Nautical Mile converter provides an instant and accurate solution, facilitating smooth transitions between these specialized units. Knowing that 1 nautical mile equals 1.852 kilometers, our tool precisely handles this conversion, ensuring clear communication and accurate navigation across all domains.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>

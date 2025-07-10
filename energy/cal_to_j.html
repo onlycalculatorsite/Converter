@@ -1,0 +1,160 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Calorie to Joule Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Calories (cal) to Joules (J) with ease and precision.
+    </p>
+
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('energy_converter_index') }}" class="converter-tab-button" data-converter-type="energy" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Energy Home</a>
+        <a href="{{ url_for('energy_specific_conversion', from_unit='j', to_unit='cal') }}" class="converter-tab-button" data-converter-type="energy-j-cal" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">J to cal</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Calories (cal):</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 100" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Joules):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Calorie">Calorie</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Joule">Joule</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Calorie to Joule Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Calorie to Joule converter is an essential tool for accurately translating energy values from the dietary unit (calories) to the standard scientific unit (joules). This conversion is crucial in physics, chemistry, and engineering for standardizing energy calculations. With its intuitive interface, you can quickly get accurate conversion amounts, ensuring precision in your scientific analysis.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast & Accurate</h3>
+            <p>Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👍</div>
+            <h3>User-Friendly Interface</h3>
+            <p>Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3>Comprehensive Tools</h3>
+            <p>A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Always Free</h3>
+            <p>Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Calories and Joules</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Calorie (cal)?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>calorie (cal)</b> is a unit of energy. The "small calorie" or "gram calorie" is the amount of energy required to raise the temperature of one gram of water by one degree Celsius.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Joule (J)?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            The <b>joule (J)</b> is a derived unit of energy in the International System of Units (SI). It is equal to the energy transferred to (or work done on) an object when a force of one newton acts on that object in the direction of the force's motion through a distance of one meter.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert cal to J?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting calories to joules is essential for standardizing energy measurements in scientific and engineering fields. While calories are common in nutrition, joules are the standard unit of energy in physics. Our converter uses the standard conversion: 1 cal = 4.184 J, providing simple and accurate results.
+        </p>
+    </div>
+</section>
+
+<section id="faq-section" class="section-container">
+    <h2 class="section-heading">Frequently Asked Questions</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is this Unit Converter free to use?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Yes, our Unit Converter tool is completely free for everyone. There are no hidden charges or subscription fees. You can use it as many times as you want.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>How accurate are the conversions?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Our converters are designed to provide highly accurate results based on standard conversion rates. We strive to ensure precision for all your needs.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Can I convert any unit type?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>We offer a comprehensive range of unit types including Length, Weight, Temperature, Area, Volume, Time, and Age. We are continuously adding more tools.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is the website mobile-friendly?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Absolutely! Our website is fully responsive, meaning it's optimized for seamless use on all devices, including desktops, tablets, and mobile phones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/energy_converter.js') }}"></script>

@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Kilometer to Miles Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Kilometer to Miles with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('length_converter_index') }}" class="converter-tab-button" data-converter-type="length" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Length Home</a>
+        <a href="{{ url_for('length_specific_conversion', from_unit='miles', to_unit='kilometer') }}" class="converter-tab-button" data-converter-type="length-miles-kilometer" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Miles to Kilometer</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Kilometers:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 10" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output:</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Kilometer">Kilometer</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Mile">Mile</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Kilometer to Miles Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Welcome to our accurate Kilometer to Miles Converter, an indispensable tool for bridging the gap between metric and imperial distance measurements. This converter is crucial for travelers, drivers, athletes, and anyone interacting with information presented in different unit systems across the globe. Whether you're planning a road trip, analyzing international sports statistics, or simply trying to understand distances in a foreign context, our tool provides instant and precise conversions. Its intuitive design ensures ease of use, helping you quickly translate kilometers into miles, thereby simplifying your understanding and ensuring accuracy in all your activities.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Kilometers and Miles</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Kilometer?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>kilometer (km)</b> is a unit of length in the metric system, equivalent to one thousand meters. It is the most commonly used unit for expressing geographical distances on land in most parts of the world. Kilometers are fundamental for mapping, transportation, and everyday measurements in countries that have adopted the metric system. Its base-10 nature simplifies calculations and makes it an intuitive unit for large-scale distances, facilitating international communication and standardization in many practical applications.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Mile?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>mile (mi)</b> is a unit of length in the imperial and U.S. customary systems of measurement, primarily used for expressing distances on land. One international mile is legally defined as exactly 1,609.344 meters, or 1.609344 kilometers. The mile is still widely used for road distances in the United States and the United Kingdom, and in some aspects of aviation and maritime navigation globally. Its historical roots and continued use in specific regions make conversions to and from metric units like kilometers a frequent necessity for travelers and those dealing with international data.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Kilometers to Miles?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            The conversion from kilometers to miles is a frequent requirement due to the varying measurement systems in use worldwide. This conversion is particularly important for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>International Travel:</b> Drivers and travelers often need to convert road signs and speed limits from kilometers (common in most countries) to miles (used in the US and UK).</li>
+                <li><b>Sports and Athletics:</b> Understanding race distances or personal bests when events are measured in kilometers but personal preference or local reporting is in miles.</li>
+                <li><b>Media and News:</b> Translating geographical distances mentioned in international news or documentaries for a domestic audience.</li>
+                <li><b>Navigation:</b> Plotting routes or using GPS systems that might display distances in a different unit than preferred.</li>
+                <li><b>Data Analysis:</b> Standardizing data sets that may contain mixed distance units for consistent reporting and comparison.</li>
+            </ul>
+            Our Kilometer to Miles converter provides an instant and accurate solution, simplifying these crucial conversions. Knowing that 1 kilometer is approximately 0.621371 miles, our tool processes this factor seamlessly, saving you time and preventing manual calculation errors, thereby ensuring clarity and precision in all your tasks.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>

@@ -1,0 +1,53 @@
+{% include 'header.html' %}
+
+<section id="main-blog-listing" class="section-container">
+    <h1 class="section-heading">Our Blog</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Latest articles, guides, and insights from Convertify.AI.
+    </p>
+
+    <div class="blog-cards-grid">
+        <a href="{{ url_for('blog_post', slug='how_to_convert_length_units') }}" class="blog-card">
+            <img src="https://via.placeholder.com/300x200?text=Blog+Image+1" alt="Blog Post Image" class="blog-card-image">
+            <div class="blog-card-content">
+                <h3>How to Convert Length Units Accurately</h3>
+                <p>Learn the easiest ways to convert between meters, feet, inches, and more for your everyday needs.</p>
+                <span class="read-more">Read More ›</span>
+            </div>
+        </a>
+        <a href="{{ url_for('blog_post', slug='understanding_currency_exchange') }}" class="blog-card">
+            <img src="https://via.placeholder.com/300x200?text=Blog+Image+2" alt="Blog Post Image" class="blog-card-image">
+            <div class="blog-card-content">
+                <h3>Understanding Live Currency Exchange Rates</h3>
+                <p>Explore the dynamics of currency conversion and how live rates impact your international transactions.</p>
+                <span class="read-more">Read More ›</span>
+            </div>
+        </a>
+        <a href="{{ url_for('blog_post', slug='the_science_of_temperature') }}" class="blog-card">
+            <img src="https://via.placeholder.com/300x200?text=Blog+Image+3" alt="Blog Post Image" class="blog-card-image">
+            <div class="blog-card-content">
+                <h3>The Science Behind Temperature Conversions</h3>
+                <p>Dive into the fascinating world of temperature scales: Celsius, Fahrenheit, and Kelvin explained simply.</p>
+                <span class="read-more">Read More ›</span>
+            </div>
+        </a>
+        <a href="{{ url_for('blog_post', slug='another_interesting_topic') }}" class="blog-card">
+            <img src="https://via.placeholder.com/300x200?text=Blog+Image+4" alt="Blog Post Image" class="blog-card-image">
+            <div class="blog-card-content">
+                <h3>Another Interesting Topic for a Blog</h3>
+                <p>This is a placeholder for another blog post to show how it would look in the listing.</p>
+                <span class="read-more">Read More ›</span>
+            </div>
+        </a>
+        <a href="{{ url_for('blog_post', slug='yet_another_conversion_guide') }}" class="blog-card">
+            <img src="https://via.placeholder.com/300x200?text=Blog+Image+5" alt="Blog Post Image" class="blog-card-image">
+            <div class="blog-card-content">
+                <h3>Yet Another Conversion Guide: Volume Units</h3>
+                <p>A detailed guide to converting between various volume units, from liters to gallons and more.</p>
+                <span class="read-more">Read More ›</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+{% include 'footer.html' %}

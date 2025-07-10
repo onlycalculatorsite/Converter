@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Gallons to Liters Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Gallons (US Liquid) to Liters with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('volume_converter_index') }}" class="converter-tab-button" data-converter-type="volume" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Volume Home</a>
+        <a href="{{ url_for('volume_specific_conversion', from_unit='liters', to_unit='gallons') }}" class="converter-tab-button" data-converter-type="volume-liters-gallons" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Liters to Gallons</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Gallons:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 5" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Liters):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Gallon (US Liquid)">Gallon (US Liquid)</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Liter">Liter</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Gallons to Liters Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Gallons to Liters converter is an essential tool for easily translating liquid volumes from the imperial/U.S. customary system (gallons) to the widely used metric system (liters). This conversion is crucial in various fields such as culinary arts, automotive, engineering, and international trade, where precise volume measurements are vital across different standards. With its intuitive interface, you can quickly get accurate conversion amounts, ensuring your recipes, fuel calculations, or product specifications are always precise and universally understood.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Gallons and Liters</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Gallon? (US Liquid)</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>gallon</b> is a unit of volume, primarily used for measuring liquids, and it has different definitions. In the context of the U.S. customary system, a <b>U.S. liquid gallon</b> is defined as 231 cubic inches, which is approximately 3.785 liters. It is commonly used in the United States, and to some extent in other countries, for measuring fuel, milk, and other liquid products. The imperial gallon, used in the United Kingdom and some Commonwealth countries, is a different volume. Our converter focuses on the U.S. liquid gallon.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Liter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>liter (L)</b> is a unit of volume in the metric system, equal to one cubic decimeter (1 L = 1 dm³). It is widely used globally for measuring liquids, such as water, beverages, and fuel. Its decimal nature simplifies calculations and makes it an intuitive unit for various applications, from cooking and chemistry to industrial processes. The liter is a fundamental unit for volume measurement in countries that have adopted the metric system, ensuring consistency and ease of use in daily life and scientific endeavors.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Gallons to Liters?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting gallons to liters is a frequent necessity due to the coexistence of the imperial/U.S. customary and metric measurement systems worldwide. This conversion is vital for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>International Travel & Fuel:</b> Understanding fuel quantities when driving in metric countries or interpreting vehicle specifications.</li>
+                <li><b>Cooking & Recipes:</b> Adapting recipes from U.S. customary measurements to metric measurements, which are common globally.</li>
+                <li><b>Scientific Research:</b> Standardizing data collected in gallons into liters for consistency in scientific reporting and analysis.</li>
+                <li><b>Beverage Industry:</b> Converting production volumes or container sizes for international distribution and compliance.</li>
+                <li><b>Retail and Import/Export:</b> Ensuring accurate volume declaration for customs or inventory management when dealing with goods measured in different systems.</li>
+            </ul>
+            Our Gallons to Liters converter provides an instant and accurate solution, facilitating these crucial translations. Knowing that 1 U.S. liquid gallon equals approximately 3.78541 liters, our tool seamlessly processes this factor, saving you time and preventing manual calculation errors, thereby ensuring clarity and precision in all your tasks.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/volume_converter.js') }}"></script>

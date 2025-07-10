@@ -1,0 +1,552 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Volume Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert various volume units quickly and accurately, or select a specific conversion below.
+    </p>
+    
+    
+<div class="converter-tabs">
+        <a href="{{ url_for('currency_converter_page_index') }}" class="converter-tab-button" data-converter-type="currency">Currency</a>
+        <a href="{{ url_for('digital_storage_converter_index') }}" class="converter-tab-button" data-converter-type="digital_storage">Digital Storage</a>
+        <a href="{{ url_for('temperature_converter_index') }}" class="converter-tab-button" data-converter-type="temperature">Temperature</a>
+        <a href="{{ url_for('time_converter_index') }}" class="converter-tab-button" data-converter-type="time">Time</a>
+        <a href="{{ url_for('age_converter_index') }}" class="converter-tab-button" data-converter-type="age">Age</a>
+        </div>
+
+    <div class="converter-grid">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--text-dark);">From:</label>
+            <input type="number" id="fromUnitInput" placeholder="Enter value" style="
+                background-color: var(--card-section-background);
+                color: var(--text-dark);
+                border: 1px solid var(--border-color);
+            ">
+        </div>
+        <div></div> 
+        <div class="converter-select-group">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect" style="
+                background-color: var(--card-section-background);
+                color: var(--text-dark);
+                border: 1px solid var(--border-color);
+            ">
+            </select>
+        </div>
+        <div class="converter-select-group">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect" style="
+                background-color: var(--card-section-background);
+                color: var(--text-dark);
+                border: 1px solid var(--border-color);
+            ">
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="converter-result" id="conversionResult" style="
+        background-color: var(--primary-background);
+        color: var(--accent-highlight);
+        border: 2px solid var(--primary-button);
+    ">Enter value to convert</div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="margin-top: 50px;">
+        <h2 class="section-heading" style="font-size: 1.5rem; margin-bottom: 20px; color: var(--primary-button);">Find & Set Units</h2>
+        <div class="search-units-grid" style="gap: 20px;">
+            <div class="converter-input-group">
+                <label for="searchFromUnit" style="color: var(--accent-highlight); font-size: 1.0rem; font-weight: 600; margin-bottom: 10px;">From Unit (e.g., Liter):</label>
+                <input type="text" id="searchFromUnit" placeholder="e.g. liter" style="
+                    background-color: var(--card-section-background);
+                    color: var(--text-dark);
+                    border: 1px solid var(--border-color);
+                    padding: 12px 15px;
+                    font-size: 1.1rem;
+                    box-shadow: 0 0 8px rgba(106, 27, 154, 0.03);
+                    width: 100%;
+                    border-radius: 6px;
+                ">
+            </div>
+            <div class="converter-input-group">
+                <label for="searchToUnit" style="color: var(--accent-highlight); font-size: 1.0rem; font-weight: 600; margin-bottom: 10px;">To Unit (e.g., Gallon):</label>
+                <input type="text" id="searchToUnit" placeholder="e.g. gallon" style="
+                    background-color: var(--card-section-background);
+                    color: var(--text-dark);
+                    border: 1px solid var(--border-color);
+                    padding: 12px 15px;
+                    font-size: 1.1rem;
+                    box-shadow: 0 0 8px rgba(106, 27, 154, 0.03);
+                    width: 100%;
+                    border-radius: 6px;
+                ">
+            </div>
+        </div>
+        <button id="searchUnitsButton" class="primary-button" style="margin-top: 25px; width: 100%; padding: 15px; font-size: 1.2rem; background-color: var(--primary-button); color: var(--card-section-background);">Find & Set Units</button>
+        <div id="searchUnitsResultMessage" class="converter-result" style="margin-top: 15px; border: none; background: none; box-shadow: none; font-size: 1rem; min-height: unset; color: var(--text-medium); text-align: center;"></div>
+    </div>
+
+    <section id="important-volume-conversions" class="section-container" style="padding-top: 0;">
+        <h2 class="section-heading" style="font-size: 1.8rem; margin-top: 40px;">Popular Volume Conversions</h2>
+        <div class="popular-conversions-grid">
+            <a href="{{ url_for('volume_specific_conversion', from_unit='liters', to_unit='gallons') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💧</div>
+                    <h3 style="color: var(--accent-highlight);">Liters to Gallons</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='gallons', to_unit='liters') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💧</div>
+                    <h3 style="color: var(--accent-highlight);">Gallons to Liters</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='ml', to_unit='cups') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">☕</div>
+                    <h3 style="color: var(--accent-highlight);">ML to Cups</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='cups', to_unit='ml') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">☕</div>
+                    <h3 style="color: var(--accent-highlight);">Cups to ML</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='tablespoons', to_unit='cups') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🥄</div>
+                    <h3 style="color: var(--accent-highlight);">Tablespoons to Cups</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='cups', to_unit='tablespoons') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🥄</div>
+                    <h3 style="color: var(--accent-highlight);">Cups to Tablespoons</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='ml', to_unit='liters') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🧪</div>
+                    <h3 style="color: var(--accent-highlight);">ML to Liters</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='liters', to_unit='ml') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🧪</div>
+                    <h3 style="color: var(--accent-highlight);">Liters to ML</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='teaspoon', to_unit='ml') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🥄</div>
+                    <h3 style="color: var(--accent-highlight);">Teaspoon to ML</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='ml', to_unit='teaspoon') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🥄</div>
+                    <h3 style="color: var(--accent-highlight);">ML to Teaspoon</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='liters', to_unit='quarts') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🥛</div>
+                    <h3 style="color: var(--accent-highlight);">Liters to Quarts</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='quarts', to_unit='liters') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🥛</div>
+                    <h3 style="color: var(--accent-highlight);">Quarts to Liters</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='pint', to_unit='ml') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🍺</div>
+                    <h3 style="color: var(--accent-highlight);">Pint to ML</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='ml', to_unit='pint') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🍺</div>
+                    <h3 style="color: var(--accent-highlight);">ML to Pint</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='cc', to_unit='ml') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💉</div>
+                    <h3 style="color: var(--accent-highlight);">CC to ML</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='ml', to_unit='cc') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💉</div>
+                    <h3 style="color: var(--accent-highlight);">ML to CC</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='cc', to_unit='oz') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💧</div>
+                    <h3 style="color: var(--accent-highlight);">CC to Ounces</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='oz', to_unit='cc') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💧</div>
+                    <h3 style="color: var(--accent-highlight);">Ounces to CC</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='cubic_feet', to_unit='gallon_us_liquid') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🚰</div>
+                    <h3 style="color: var(--accent-highlight);">Cubic Feet to Gallons</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='gallon_us_liquid', to_unit='cubic_feet') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🚰</div>
+                    <h3 style="color: var(--accent-highlight);">Gallons to Cubic Feet</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='cubic_inches', to_unit='gallons') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🚗</div>
+                    <h3 style="color: var(--accent-highlight);">Cubic Inches to Gallons</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('volume_specific_conversion', from_unit='gallons', to_unit='cubic_inches') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🚗</div>
+                    <h3 style="color: var(--accent-highlight);">Gallons to Cubic Inches</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+        </div>
+    </section>
+
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast & Accurate</h3>
+            <p>Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👍</div>
+            <h3>User-Friendly Interface</h3>
+            <p>Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3>Comprehensive Tools</h3>
+            <p>A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Always Free</h3>
+            <p>Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="how-to-use" class="section-container">
+    <h2 class="section-heading">How to Use Our Converters</h2>
+    <div class="how-to-use-content">
+        <h3>Get Started in Seconds!</h3>
+        <ol>
+            <li><b>Select Conversion Type:</b> Choose the type of conversion you need from the tabs at the top (e.g., Length, Weight, Temperature).</li>
+            <li><b>Choose Units:</b> Select your desired "From" and "To" units from the dropdown menus.</li>
+            <li><b>Enter Value:</b> Type the value you wish to convert into the "From" input field.</li>
+            <li><b>View Result:</b> The converted result will automatically appear in the "To" field.</li>
+            <li><b>Explore More:</b> Check out our "More Tools" section below for other useful converters!</li>
+        </ol>
+    </div>
+</section>
+
+<section id="more-tools" class="section-container">
+    <h2 class="section-heading">Explore More Converters</h2>
+    <div class="tools-grid">
+        <a href="{{ url_for('length_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📏</div>
+            <h3>Length Converter</h3>
+            <p>Convert between meters, miles, inches, and more.</p>
+        </a>
+        <a href="{{ url_for('temperature_converter_index') }}" class="tool-card">
+            <div class="tool-icon">🌡️</div>
+            <h3>Temperature Converter</h3>
+            <p>Convert between Celsius, Fahrenheit, and Kelvin.</p>
+        </a>
+        <a href="{{ url_for('area_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📐</div>
+            <h3>Area Converter</h3>
+            <p>Convert between square meters, acres, hectares, and more.</p>
+        </a>
+        <a href="{{ url_for('volume_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📦</div>
+            <h3>Volume Converter</h3>
+            <p>Convert between liters, gallons, cubic meters, and various liquid units.</p>
+        </a>
+        <a href="{{ url_for('weight_converter_index') }}" class="tool-card">
+            <div class="tool-icon">⚖️</div>
+            <h3>Weight Converter</h3>
+            <p>Convert between kilograms, pounds, ounces, and other mass units.</p>
+        </a>
+        <a href="{{ url_for('time_converter_index') }}" class="tool-card">
+            <div class="tool-icon">⏰</div>
+            <h3>Time Converter</h3>
+            <p>Convert between seconds, minutes, hours, days, weeks, and years.</p>
+        </a>
+        <a href="{{ url_for('age_converter_index') }}" class="tool-card">
+            <div class="tool-icon">🎂</div>
+            <h3>Age Converter</h3>
+            <p>Calculate your age in years, months, days, hours, and even seconds!</p>
+        </a>
+        <a href="{{ url_for('currency_converter_page_index') }}" class="tool-card">
+            <div class="tool-icon">💲</div>
+            <h3>Currency Converter</h3>
+            <p>Convert global currencies with live exchange rates.</p>
+        </a>
+        <a href="{{ url_for('speed_converter_index') }}" class="tool-card">
+            <div class="tool-icon">💨</div>
+            <h3>Speed Converter</h3>
+            <p>Convert between km/h, mph, m/s, and knots.</p>
+        </a>
+        <a href="{{ url_for('digital_storage_converter_index') }}" class="tool-card">
+            <div class="tool-icon">💾</div>
+            <h3>Digital Storage Converter</h3>
+            <p>Convert between bits, bytes, KB, MB, GB, TB, and more.</p>
+        </a>
+        <a href="{{ url_for('energy_converter_index') }}" class="tool-card">
+            <div class="tool-icon">⚡</div>
+            <h3>Energy Converter</h3>
+            <p>Convert between Joules, Calories, kWh, Electron Volts, and more.</p>
+        </a>
+        <a href="{{ url_for('frequency_converter_index') }}" class="tool-card">
+            <div class="tool-icon">〰️</div>
+            <h3>Frequency Converter</h3>
+            <p>Convert between Hertz, Kilohertz, Megahertz, Gigahertz, and more.</p>
+        </a>
+        <a href="{{ url_for('pressure_converter_index') }}" class="tool-card">
+            <div class="tool-icon"> แรงดัน </div>
+            <h3>Pressure Converter</h3>
+            <p>Convert between Pascals, PSI, Bar, Atmosphere, and more.</p>
+        </a>
+        <a href="{{ url_for('force_converter_index') }}" class="tool-card">
+            <div class="tool-icon">💪</div>
+            <h3>Force Converter</h3>
+            <p>Convert between Newtons, Dyne, Pound-force, and more.</p>
+        </a>
+        <a href="{{ url_for('power_converter_index') }}" class="tool-card">
+            <div class="tool-icon">🔌</div>
+            <h3>Power Converter</h3>
+            <p>Convert between Watts, Horsepower, Kilowatts, and more.</p>
+        </a>
+        <a href="{{ url_for('angle_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📐</div>
+            <h3>Angle Converter</h3>
+            <p>Convert between Degrees, Radians, Gradians, and more.</p>
+        </a>
+    </div>
+</section>
+
+<section id="faq-section" class="section-container">
+    <h2 class="section-heading">Frequently Asked Questions</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is this Unit Converter free to use?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Yes, our Unit Converter tool is completely free for everyone. There are no hidden charges or subscription fees. You can use it as many times as you want.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>How accurate are the conversions?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Our converters are designed to provide highly accurate results based on standard conversion rates. We strive to ensure precision for all your needs.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Can I convert any unit type?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>We offer a comprehensive range of unit types including Length, Weight, Temperature, Area, Volume, Time, and Age. We are continuously adding more tools.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is the website mobile-friendly?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Absolutely! Our website is fully responsive, meaning it's optimized for seamless use on all devices, including desktops, tablets, and mobile phones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'footer.html' %}
+```File ka naam hai:
+
+`gallons_to_cubic_inches.html`
+
+```html
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Gallons to Cubic Inches Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Gallons (US Liquid) to Cubic Inches with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('volume_converter_index') }}" class="converter-tab-button" data-converter-type="volume" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Volume Home</a>
+        <a href="{{ url_for('volume_specific_conversion', from_unit='cubic_inches', to_unit='gallons') }}" class="converter-tab-button" data-converter-type="volume-cubic_inches-gallons" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Cubic Inches to Gallons</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Gallons:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 1" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Cubic Inches):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Gallon (US Liquid)">Gallon (US Liquid)</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Cubic Inch">Cubic Inch</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Gallons to Cubic Inches Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Gallons to Cubic Inches converter is a practical tool for translating volumes from liquid measurements (U.S. liquid gallons) to cubic dimensions (cubic inches) within the U.S. customary system. This conversion is frequently needed in various fields such as automotive engineering, manufacturing, and design, where understanding and converting between liquid capacity and spatial volume is vital. With its intuitive interface, you can quickly get accurate conversion amounts, ensuring precision in your technical specifications or projects.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Gallons and Cubic Inches</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Gallon? (US Liquid)</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>gallon</b> is a unit of volume, primarily used for measuring liquids, and it has different definitions. In the context of the U.S. customary system, a <b>U.S. liquid gallon</b> is defined as 231 cubic inches, which is approximately 3.785 liters. It is commonly used in the United States, and to some extent in other countries, for measuring fuel, milk, and other liquid products. The imperial gallon, used in the United Kingdom and some Commonwealth countries, is a different volume. Our converter focuses on the U.S. liquid gallon.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Cubic Inch?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>cubic inch (in³)</b> is a unit of volume in the imperial and U.S. customary systems of measurement. It is defined as the volume of a cube with sides that are one inch long. It is commonly used for measuring small to medium volumes, such as engine displacement (e.g., cubic inches of an engine) or the volume of various components. One U.S. liquid gallon is exactly 231 cubic inches.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Gallons to Cubic Inches?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting gallons to cubic inches is a practical necessity when dealing with liquid volumes that need to be expressed in cubic dimensions for greater precision or compatibility, especially within the U.S. customary system. This conversion is vital for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Manufacturing and Design:</b> Calculating internal volumes of components or containers in cubic inches based on their liquid gallon capacity.</li>
+                <li><b>Engine Design and Modification:</b> Translating fuel tank capacities from gallons to cubic inches for detailed engine specifications.</li>
+                <li><b>Fluid Systems:</b> Analyzing volumes within hydraulic or pneumatic systems where components might be measured in cubic inches.</li>
+                <li><b>Quality Control:</b> Ensuring the accuracy of liquid filling processes by verifying the cubic inch volume of a gallon-sized container.</li>
+                <li><b>Educational Context:</b> Helping students understand the relationship between liquid volume units and spatial volume units within the imperial system.</li>
+            </ul>
+            Our Gallons to Cubic Inches converter provides an instant and accurate solution, facilitating these crucial translations. Knowing that 1 U.S. liquid gallon equals exactly 231 cubic inches, our tool seamlessly processes this direct conversion, saving you time and preventing manual calculation errors, thereby ensuring clarity and precision in all your tasks.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/volume_converter.js') }}"></script>

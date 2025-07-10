@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Cups to Milliliters Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Cups to Milliliters (ML) with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('volume_converter_index') }}" class="converter-tab-button" data-converter-type="volume" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Volume Home</a>
+        <a href="{{ url_for('volume_specific_conversion', from_unit='ml', to_unit='cups') }}" class="converter-tab-button" data-converter-type="volume-ml-cups" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Milliliters to Cups</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Cups:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 1" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Milliliters):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Cup (US)">Cup (US)</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Millilitre">Millilitre</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Cups to Milliliters Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Cups to Milliliters converter is a practical tool for translating liquid volumes from U.S. customary units (cups) to the metric system (milliliters). This conversion is frequently needed when adapting recipes or product instructions between different measurement systems. With its intuitive interface, you can quickly get accurate conversion amounts, ensuring precision in your kitchen, laboratory, or for any liquid measurement tasks.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Cups and Milliliters</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Cup? (US Customary)</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>cup</b> is a unit of volume used in both imperial and U.S. customary systems, primarily for measuring ingredients in cooking. In the U.S. customary system, a cup is legally defined as 236.5882365 milliliters. It is a very common household measure in the United States. It's important to note that a "cup" can vary in volume depending on the region (e.g., U.S. customary cup vs. metric cup, which is 250 ml). Our converter focuses on the U.S. customary cup.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Milliliter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>milliliter (ml)</b> is a unit of volume in the metric system, equal to one thousandth of a liter. It is a very common unit for measuring small quantities of liquids in various fields, including medicine, chemistry, and culinary arts. Its precise nature and integration within the decimal-based metric system make calculations straightforward and consistent, simplifying scientific, educational, and commercial applications globally.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Cups to Milliliters?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting cups to milliliters is frequently required when adapting recipes or product instructions between U.S. customary and metric measurement systems. This conversion is vital for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>International Recipes:</b> Accurately scaling recipes from U.S. sources (often using cups) for use with metric measuring tools (ml) common globally.</li>
+                <li><b>Scientific and Laboratory Work:</b> Standardizing liquid measurements for experiments or formulations where milliliters are the required unit.</li>
+                <li><b>Food Packaging & Labeling:</b> Converting product volumes for international markets to comply with local labeling requirements that use milliliters.</li>
+                <li><b>Dietary Tracking:</b> Precisely tracking liquid intake or food portions when information is given in cups but a user prefers to measure in milliliters.</li>
+                <li><b>Manufacturing and Export:</b> Ensuring product specifications are compatible across markets that use different volume units.</li>
+            </ul>
+            Our Cups to Milliliters converter provides an instant and accurate solution, facilitating these crucial translations. Knowing that 1 U.S. customary cup equals approximately 236.588 milliliters, our tool seamlessly processes this factor, saving you time and preventing manual calculation errors, thereby ensuring clarity and precision in all your tasks.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/volume_converter.js') }}"></script>

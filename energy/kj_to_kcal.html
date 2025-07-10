@@ -1,0 +1,160 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Kilojoule to Kilocalorie Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Kilojoules (kJ) to Kilocalories (kcal) with ease and precision.
+    </p>
+
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('energy_converter_index') }}" class="converter-tab-button" data-converter-type="energy" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Energy Home</a>
+        <a href="{{ url_for('energy_specific_conversion', from_unit='kcal', to_unit='kj') }}" class="converter-tab-button" data-converter-type="energy-kcal-kj" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">kcal to kJ</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Kilojoules (kJ):</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 100" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Kilocalories):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Kilojoule">Kilojoule</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Kilocalorie">Kilocalorie</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Kilojoule to Kilocalorie Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Kilojoule to Kilocalorie converter is an essential tool for accurately translating energy values, particularly in nutrition and science. This conversion is crucial for understanding food energy content and metabolic rates, bridging the gap between scientific metric units (kilojoules) and dietary energy units (kilocalories). With its intuitive interface, you can quickly get accurate conversion amounts, ensuring precision in your dietary planning and scientific analysis.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast & Accurate</h3>
+            <p>Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👍</div>
+            <h3>User-Friendly Interface</h3>
+            <p>Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3>Comprehensive Tools</h3>
+            <p>A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Always Free</h3>
+            <p>Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Kilojoules and Kilocalories</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Kilojoule (kJ)?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>kilojoule (kJ)</b> is a unit of energy in the International System of Units (SI). It is equal to 1,000 joules and is widely used in scientific contexts and for food energy labeling in many countries.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Kilocalorie (kcal)?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>kilocalorie (kcal)</b> is a unit of energy equal to 1,000 calories. In nutrition and food labeling, the term "calorie" is often used to mean kilocalorie. It's the amount of energy required to raise the temperature of one kilogram of water by one degree Celsius.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert kJ to kcal?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting kilojoules to kilocalories is essential for understanding nutritional information across different regions. While many countries use kJ for food energy labeling, others, like the United States, use kcal (often just called "Calories"). This conversion allows for a consistent understanding of dietary energy intake. Our converter uses the standard conversion: 1 kcal = 4.184 kJ.
+        </p>
+    </div>
+</section>
+
+<section id="faq-section" class="section-container">
+    <h2 class="section-heading">Frequently Asked Questions</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is this Unit Converter free to use?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Yes, our Unit Converter tool is completely free for everyone. There are no hidden charges or subscription fees. You can use it as many times as you want.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>How accurate are the conversions?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Our converters are designed to provide highly accurate results based on standard conversion rates. We strive to ensure precision for all your needs.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Can I convert any unit type?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>We offer a comprehensive range of unit types including Length, Weight, Temperature, Area, Volume, Time, and Age. We are continuously adding more tools.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is the website mobile-friendly?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Absolutely! Our website is fully responsive, meaning it's optimized for seamless use on all devices, including desktops, tablets, and mobile phones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/energy_converter.js') }}"></script>

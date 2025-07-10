@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Light Year to Miles Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Light Year to Miles with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('length_converter_index') }}" class="converter-tab-button" data-converter-type="length" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Length Home</a>
+        <a href="{{ url_for('length_specific_conversion', from_unit='miles', to_unit='light_year') }}" class="converter-tab-button" data-converter-type="length-miles-lightyear" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Miles to Light Year</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Light Years:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 1" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output:</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Light Year">Light Year</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Mile">Mile</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Light Year to Miles Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Journey through the cosmos with our Light Year to Miles Converter, a vital tool for astronomers, space enthusiasts, and anyone seeking to grasp the immense distances of the universe in imperial units. A light year represents the distance light travels in one year, a unit primarily used for vast astronomical scales, while miles are used for terrestrial distances, particularly in the United States and the United Kingdom. Our converter seamlessly bridges these vastly different scales, providing instant and accurate results. It simplifies the understanding of cosmic distances, making it easier to conceptualize the true magnitude of space in a familiar measurement.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Light Years and Miles</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Light Year?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>light year (ly)</b> is a unit of length used to express astronomical distances, defined as the distance light travels in one Julian year in vacuum. This equates to approximately 9.461 trillion kilometers, or about 5.879 trillion miles. The light year is predominantly used in popular science publications and by astronomers to conceptualize vast cosmic scales, making distances to stars and galaxies more relatable than expressing them in mere kilometers or miles. It serves as a fundamental measure for understanding the immense size and scope of the universe.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Mile?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>mile (mi)</b> is a unit of length in the imperial and U.S. customary systems of measurement, primarily used for expressing distances on land. One international mile is legally defined as exactly 1,609.344 meters, or 1.609344 kilometers. The mile is still widely used for road distances in the United States and the United Kingdom, and in some aspects of aviation and maritime navigation globally. Its historical roots and continued use in specific regions make conversions to and from metric units like light years a niche but important necessity for astronomical understanding.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Light Years to Miles?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            The conversion from light years to miles, while not a daily conversion, is crucial for those who prefer to visualize astronomical distances using imperial units. This conversion is vital for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Popular Science:</b> Presenting cosmic distances in a way that resonates with audiences accustomed to miles.</li>
+                <li><b>Educational Context:</b> Helping students in imperial-system countries grasp the scale of space by providing a familiar unit equivalent.</li>
+                <li><b>Comparative Analysis:</b> Comparing astronomical distances with other large-scale imperial measurements.</li>
+                <li><b>Science Communication:</b> Bridging the gap for a broader audience to understand the vastness of the universe when data is typically presented in light years.</li>
+                <li><b>Historical Context:</b> Understanding older astronomical texts or data that might have used imperial units for very large distances.</li>
+            </ul>
+            Our Light Year to Miles converter offers a precise and instant solution for this specialized conversion. It accurately translates these immense cosmic measures, making it easier to work with astronomical data in imperial terms, ensuring both conceptual understanding and scientific accuracy for a specific audience.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>

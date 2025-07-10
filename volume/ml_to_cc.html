@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Milliliters to Cubic Centimeters Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Milliliters (ML) to Cubic Centimeters (CC) with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('volume_converter_index') }}" class="converter-tab-button" data-converter-type="volume" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Volume Home</a>
+        <a href="{{ url_for('volume_specific_conversion', from_unit='cc', to_unit='ml') }}" class="converter-tab-button" data-converter-type="volume-cc-ml" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Cubic Centimeters to Milliliters</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Milliliters:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 1" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Cubic Centimeters):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Millilitre">Millilitre</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Cubic Centimeter">Cubic Centimeter</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Milliliters to Cubic Centimeters Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Milliliters to Cubic Centimeters converter is a fundamental tool for easily translating volumes within the metric system. This conversion is crucial in numerous scientific, medical, and engineering applications, as well as in daily life, because 1 milliliter is exactly equal to 1 cubic centimeter. This direct equivalency simplifies calculations and ensures precision in fields where volume is measured with high accuracy. With its intuitive interface, you can quickly get accurate conversion amounts, ensuring clarity and efficiency in all your tasks.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Milliliters and Cubic Centimeters</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Milliliter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>milliliter (ml)</b> is a unit of volume in the metric system, equal to one thousandth of a liter. It is a very common unit for measuring small quantities of liquids in various fields, including medicine, chemistry, and culinary arts. Its precise nature and integration within the decimal-based metric system make calculations straightforward and consistent, simplifying scientific, educational, and commercial applications globally. Since 1 ml is exactly 1 cm³, these units are often used interchangeably.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Cubic Centimeter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>cubic centimeter (cm³)</b>, often abbreviated as `cc`, is a unit of volume in the metric system. It is defined as the volume of a cube with sides that are one centimeter long. One cubic centimeter is exactly equivalent to one milliliter (1 cm³ = 1 ml). This direct equivalence makes it a versatile unit, widely used in various fields including medicine (for drug dosages), automotive (for engine displacement), and scientific measurements.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Milliliters to Cubic Centimeters?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting milliliters (ml) to cubic centimeters (cc) is often a matter of preferred terminology or convention, as these two units represent the exact same volume (1 ml = 1 cc). This "conversion" (or rather, interchangeability) is vital for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Medical Dosing:</b> Medications may be prescribed in milliliters but administered via syringes marked in cubic centimeters (cc).</li>
+                <li><b>Scientific and Laboratory Work:</b> Data might be recorded in milliliters but reported or used in calculations requiring cubic centimeters, or vice versa.</li>
+                <li><b>Automotive Specifications:</b> Fluid capacities might be in milliliters but engine displacement is often given in cubic centimeters (e.g., 1600 cc).</li>
+                <li><b>Product Labeling:</b> Some products, especially those with precise liquid volumes, might use one unit over the other depending on regional standards.</li>
+                <li><b>Clarity and Consistency:</b> Ensuring clear communication and consistency across different documents, disciplines, or conversations where both terms are used.</li>
+            </ul>
+            Our Milliliters to Cubic Centimeters converter provides an instant solution for this direct equivalency, making it easy to switch between the terms without any calculation errors, thereby ensuring clarity and precision in all your tasks.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/volume_converter.js') }}"></script>

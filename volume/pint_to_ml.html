@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Pint to Milliliters Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Pint (US Liquid) to Milliliters (ML) with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('volume_converter_index') }}" class="converter-tab-button" data-converter-type="volume" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Volume Home</a>
+        <a href="{{ url_for('volume_specific_conversion', from_unit='ml', to_unit='pint') }}" class="converter-tab-button" data-converter-type="volume-ml-pint" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Milliliters to Pint</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Pints:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 1" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Milliliters):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Pint (US Liquid)">Pint (US Liquid)</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Millilitre">Millilitre</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Pint to Milliliters Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Pint to Milliliters converter is a practical tool for translating liquid volumes from U.S. customary units (pints) to the metric system (milliliters). This conversion is frequently needed in culinary contexts, especially when adapting international recipes, or for precise dosing in medical and scientific applications where measurements might be given in pints but require conversion to milliliters for practical use. With its intuitive interface, you can quickly get accurate conversion amounts, ensuring precision in your kitchen, laboratory, or for any small-scale liquid measurement tasks.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Pints and Milliliters</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Pint? (US Liquid)</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>pint</b> is a unit of volume in both the imperial and U.S. customary systems, commonly used for liquids. In the U.S. customary system, a <b>U.S. liquid pint</b> is equal to 1/8 of a U.S. liquid gallon, or exactly 16 U.S. customary fluid ounces. It is approximately 473.176 milliliters. The pint is often used for serving beverages (like beer) and for measuring ingredients in recipes. It is important to note that the imperial pint (used in the UK) has a different volume. Our converter focuses on the U.S. liquid pint.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Milliliter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>milliliter (ml)</b> is a unit of volume in the metric system, equal to one thousandth of a liter. It is a very common unit for measuring small quantities of liquids in various fields, including medicine, chemistry, and culinary arts. Its precise nature and integration within the decimal-based metric system make calculations straightforward and consistent, simplifying scientific, educational, and commercial applications globally.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Pints to Milliliters?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting pints to milliliters is frequently required when adapting recipes, product instructions, or fluid measurements between U.S. customary and metric systems. This conversion is vital for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Cooking and Baking:</b> Accurately scaling recipes from U.S. sources (often using pints) for use with metric measuring tools (ml) common globally.</li>
+                <li><b>Medical Dosing:</b> Precisely converting liquid medication dosages from pints (if larger quantities are involved) to milliliters for accurate administration.</li>
+                <li><b>International Beverages:</b> Understanding serving sizes or volumes of drinks when information is provided in pints but metric is preferred.</li>
+                <li><b>Scientific Experiments:</b> Measuring and standardizing liquid quantities for laboratory work where milliliters are the standard unit.</li>
+                <li><b>Product Manufacturing:</b> Ensuring product volumes comply with international labeling requirements that use milliliters.</li>
+            </ul>
+            Our Pint to Milliliters converter provides an instant and accurate solution, facilitating these crucial translations. Knowing that 1 U.S. liquid pint equals approximately 473.176 milliliters, our tool seamlessly processes this factor, saving you time and preventing manual calculation errors, thereby ensuring clarity and precision in all your tasks.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/volume_converter.js') }}"></script>

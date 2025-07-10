@@ -1,0 +1,137 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Inches to Centimeter Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Inches to Centimeter with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('length_converter_index') }}" class="converter-tab-button" data-converter-type="length" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Length Home</a>
+        <a href="{{ url_for('length_specific_conversion', from_unit='cm', to_unit='inches') }}" class="converter-tab-button" data-converter-type="length-cm-inches" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Centimeter to Inches</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Inches:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 10" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br> <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output:</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Inch">Inch</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Centimeter">Centimeter</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Centimeter to Inches Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Welcome to our efficient Centimeter to Inches Converter, your go-to tool for quick and accurate length transformations. This converter is essential for designers, tailors, students, and anyone dealing with international measurements, bridging the gap between the universally adopted metric system and the imperial system predominantly used in the United States. Our tool ensures seamless conversions, making it easy to translate precise measurements for clothing, furniture, or any project requiring dimensional accuracy. With its intuitive design, you can get instant results, ensuring your work is always precise and hassle-free.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Centimeters and Inches</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Centimeter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>centimeter (cm)</b> is a unit of length in the metric system, equal to one hundredth of a meter. It's widely used globally for everyday measurements where units smaller than a meter but larger than a millimeter are practical. From measuring fabric for clothing to dimensions of small objects, the centimeter provides a convenient scale. Its integration within the decimal-based metric system makes calculations straightforward and consistent, simplifying scientific, educational, and commercial applications across most of the world.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is an Inch?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            An <b>inch (in)</b> is a unit of length in the imperial and U.S. customary systems of measurement. Historically derived from the width of a human thumb, it is now precisely defined as 2.54 centimeters. The inch is commonly used in the United States, Canada, and the United Kingdom for a variety of measurements, including screen sizes, tire dimensions, and some construction materials. Its widespread use in these regions makes conversions to and from metric units like centimeters a frequent necessity for international compatibility and understanding.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Centimeters to Inches?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            The need to convert centimeters to inches arises frequently due to the differing measurement systems used across the globe. This conversion is particularly vital in fields such as:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Fashion and Textiles:</b> Garment sizes and fabric dimensions are often provided in centimeters for international markets, but consumers in imperial-using countries need them in inches.</li>
+                <li><b>Manufacturing and Retail:</b> Product specifications (e.g., electronics, furniture) might be metric, requiring conversion for sale or use in imperial regions.</li>
+                <li><b>DIY and Home Improvement:</b> When following international guides or using imported materials, converting centimeters to inches ensures accuracy in cutting, fitting, and building.</li>
+                <li><b>Graphic Design and Printing:</b> Precise measurements for layouts, image sizes, or print dimensions often require toggling between metric and imperial units.</li>
+                <li><b>Travel:</b> Understanding dimensions of luggage or personal items when international standards differ.</li>
+            </ul>
+            Our Centimeter to Inches converter provides an instant and accurate solution, simplifying these conversions. Knowing that 1 inch equals 2.54 centimeters, our tool processes this factor seamlessly, saving you time and preventing manual calculation errors, thereby ensuring precision in all your tasks.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>

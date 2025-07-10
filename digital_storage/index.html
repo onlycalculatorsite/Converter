@@ -1,0 +1,310 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Digital Storage Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert various digital storage units like bits, bytes, kilobytes, and gigabytes.
+    </p>
+    
+    <div class="converter-tabs">
+        <a href="{{ url_for('currency_converter_page_index') }}" class="converter-tab-button" data-converter-type="currency">Currency</a>
+        <a href="{{ url_for('digital_storage_converter_index') }}" class="converter-tab-button" data-converter-type="digital_storage">Digital Storage</a>
+        <a href="{{ url_for('temperature_converter_index') }}" class="converter-tab-button" data-converter-type="temperature">Temperature</a>
+        <a href="{{ url_for('time_converter_index') }}" class="converter-tab-button" data-converter-type="time">Time</a>
+        <a href="{{ url_for('age_converter_index') }}" class="converter-tab-button" data-converter-type="age">Age</a>
+    </div>
+
+    <div class="converter-grid">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--text-dark);">From:</label>
+            <input type="number" id="fromUnitInput" placeholder="Enter value" style="
+                background-color: var(--card-section-background);
+                color: var(--text-dark);
+                border: 1px solid var(--border-color);
+            ">
+        </div>
+        <div></div> 
+        <div class="converter-select-group">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect" style="
+                background-color: var(--card-section-background);
+                color: var(--text-dark);
+                border: 1px solid var(--border-color);
+            ">
+            </select>
+        </div>
+        <div class="converter-select-group">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect" style="
+                background-color: var(--card-section-background);
+                color: var(--text-dark);
+                border: 1px solid var(--border-color);
+            ">
+            </select>
+        </div>
+    </div>
+    <br>
+    <h2 style="text-align: center; color: var(--accent-highlight); font-size: 1.5rem; margin-bottom: 10px;">Your Result is Here:</h2>
+    <div class="converter-result" id="conversionResult" style="
+        background-color: var(--primary-background);
+        color: var(--accent-highlight);
+        border: 2px solid var(--primary-button);
+    ">Enter value to convert</div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="margin-top: 50px;">
+        <h2 class="section-heading" style="font-size: 1.5rem; margin-bottom: 20px; color: var(--primary-button);">Find & Set Units</h2>
+        <div class="search-units-grid" style="gap: 20px;">
+            <div class="converter-input-group">
+                <label for="searchFromUnit" style="color: var(--accent-highlight); font-size: 1.0rem; font-weight: 600; margin-bottom: 10px;">From Unit (e.g., Gigabyte):</label>
+                <input type="text" id="searchFromUnit" placeholder="e.g. gigabyte" style="
+                    background-color: var(--card-section-background);
+                    color: var(--text-dark);
+                    border: 1px solid var(--border-color);
+                    padding: 12px 15px;
+                    font-size: 1.1rem;
+                    box-shadow: 0 0 8px rgba(106, 27, 154, 0.03);
+                    width: 100%;
+                    border-radius: 6px;
+                ">
+            </div>
+            <div class="converter-input-group">
+                <label for="searchToUnit" style="color: var(--accent-highlight); font-size: 1.0rem; font-weight: 600; margin-bottom: 10px;">To Unit (e.g., Megabyte):</label>
+                <input type="text" id="searchToUnit" placeholder="e.g. megabyte" style="
+                    background-color: var(--card-section-background);
+                    color: var(--text-dark);
+                    border: 1px solid var(--border-color);
+                    padding: 12px 15px;
+                    font-size: 1.1rem;
+                    box-shadow: 0 0 8px rgba(106, 27, 154, 0.03);
+                    width: 100%;
+                    border-radius: 6px;
+                ">
+            </div>
+        </div>
+        <button id="searchUnitsButton" class="primary-button" style="margin-top: 25px; width: 100%; padding: 15px; font-size: 1.2rem; background-color: var(--primary-button); color: var(--card-section-background);">Find & Set Units</button>
+        <div id="searchUnitsResultMessage" class="converter-result" style="margin-top: 15px; border: none; background: none; box-shadow: none; font-size: 1rem; min-height: unset; color: var(--text-medium); text-align: center;"></div>
+    </div>
+
+    <section id="important-storage-conversions" class="section-container" style="padding-top: 0;">
+        <h2 class="section-heading" style="font-size: 1.8rem; margin-top: 40px;">Popular Digital Storage Conversions</h2>
+        <div class="popular-conversions-grid">
+            <a href="{{ url_for('digital_storage_specific_conversion', from_unit='mb', to_unit='gb') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💾</div>
+                    <h3 style="color: var(--accent-highlight);">MB to GB</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('digital_storage_specific_conversion', from_unit='gb', to_unit='mb') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💿</div>
+                    <h3 style="color: var(--accent-highlight);">GB to MB</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('digital_storage_specific_conversion', from_unit='kb', to_unit='mb') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💽</div>
+                    <h3 style="color: var(--accent-highlight);">KB to MB</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('digital_storage_specific_conversion', from_unit='mb', to_unit='kb') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💾</div>
+                    <h3 style="color: var(--accent-highlight);">MB to KB</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('digital_storage_specific_conversion', from_unit='kb', to_unit='gb') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">🖥️</div>
+                    <h3 style="color: var(--accent-highlight);">KB to GB</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('digital_storage_specific_conversion', from_unit='gb', to_unit='kb') }}" class="conversion-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+                <div class="card-content">
+                    <div class="card-icon" style="color: var(--primary-button);">💻</div>
+                    <h3 style="color: var(--accent-highlight);">GB to KB</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+        </div>
+    </section>
+
+</section>
+
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast & Accurate</h3>
+            <p>Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👍</div>
+            <h3>User-Friendly Interface</h3>
+            <p>Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3>Comprehensive Tools</h3>
+            <p>A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Always Free</h3>
+            <p>Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="how-to-use" class="section-container">
+    <h2 class="section-heading">How to Use Our Converters</h2>
+    <div class="how-to-use-content">
+        <h3>Get Started in Seconds!</h3>
+        <ol>
+            <li><b>Select Conversion Type:</b> Choose the type of conversion you need from the tabs at the top (e.g., Length, Weight, Temperature).</li>
+            <li><b>Choose Units:</b> Select your desired "From" and "To" units from the dropdown menus.</li>
+            <li><b>Enter Value:</b> Type the value you wish to convert into the "From" input field.</li>
+            <li><b>View Result:</b> The converted result will automatically appear in the "To" field.</li>
+            <li><b>Explore More:</b> Check out our "More Tools" section below for other useful converters!</li>
+        </ol>
+    </div>
+</section>
+
+<section id="understanding-digital-converter" class="section-container">
+    <h2 class="section-heading">Understanding Our Digital Storage Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our digital storage converter is designed to provide quick and accurate conversions between various units of digital information. Whether you're a student, IT professional, or just curious about file sizes, our tool is here to help. From the smallest bit to the largest terabyte, you can effortlessly switch between units to meet your needs, ensuring you understand your data storage and transfer capacities with ease.
+        </p>
+    </div>
+</section>
+
+<section id="more-tools" class="section-container">
+    <h2 class="section-heading">Explore More Converters</h2>
+    <div class="tools-grid">
+        <a href="{{ url_for('length_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📏</div>
+            <h3>Length Converter</h3>
+            <p>Convert between meters, miles, inches, and more.</p>
+        </a>
+        <a href="{{ url_for('temperature_converter_index') }}" class="tool-card">
+            <div class="tool-icon">🌡️</div>
+            <h3>Temperature Converter</h3>
+            <p>Convert between Celsius, Fahrenheit, and Kelvin.</p>
+        </a>
+        <a href="{{ url_for('area_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📐</div>
+            <h3>Area Converter</h3>
+            <p>Convert between square meters, acres, hectares, and more.</p>
+        </a>
+        <a href="{{ url_for('volume_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📦</div>
+            <h3>Volume Converter</h3>
+            <p>Convert between liters, gallons, cubic meters, and various liquid units.</p>
+        </a>
+        <a href="{{ url_for('weight_converter_index') }}" class="tool-card">
+            <div class="tool-icon">⚖️</div>
+            <h3>Weight Converter</h3>
+            <p>Convert between kilograms, pounds, ounces, and other mass units.</p>
+        </a>
+        <a href="{{ url_for('time_converter_index') }}" class="tool-card">
+            <div class="tool-icon">⏰</div>
+            <h3>Time Converter</h3>
+            <p>Convert between seconds, minutes, hours, days, weeks, and years.</p>
+        </a>
+        <a href="{{ url_for('age_converter_index') }}" class="tool-card">
+            <div class="tool-icon">🎂</div>
+            <h3>Age Converter</h3>
+            <p>Calculate your age in years, months, days, hours, and even seconds!</p>
+        </a>
+        <a href="{{ url_for('currency_converter_page_index') }}" class="tool-card">
+            <div class="tool-icon">💲</div>
+            <h3>Currency Converter</h3>
+            <p>Convert global currencies with live exchange rates.</p>
+        </a>
+        <a href="{{ url_for('speed_converter_index') }}" class="tool-card">
+            <div class="tool-icon">💨</div>
+            <h3>Speed Converter</h3>
+            <p>Convert between km/h, mph, m/s, and knots.</p>
+        </a>
+        <a href="{{ url_for('digital_storage_converter_index') }}" class="tool-card">
+            <div class="tool-icon">💾</div>
+            <h3>Digital Storage Converter</h3>
+            <p>Convert between bits, bytes, KB, MB, GB, TB, and more.</p>
+        </a>
+        <a href="{{ url_for('energy_converter_index') }}" class="tool-card">
+            <div class="tool-icon">⚡</div>
+            <h3>Energy Converter</h3>
+            <p>Convert between Joules, Calories, kWh, Electron Volts, and more.</p>
+        </a>
+        <a href="{{ url_for('frequency_converter_index') }}" class="tool-card">
+            <div class="tool-icon">〰️</div>
+            <h3>Frequency Converter</h3>
+            <p>Convert between Hertz, Kilohertz, Megahertz, Gigahertz, and more.</p>
+        </a>
+        <a href="{{ url_for('pressure_converter_index') }}" class="tool-card">
+            <div class="tool-icon"> แรงดัน </div>
+            <h3>Pressure Converter</h3>
+            <p>Convert between Pascals, PSI, Bar, Atmosphere, and more.</p>
+        </a>
+        <a href="{{ url_for('force_converter_index') }}" class="tool-card">
+            <div class="tool-icon">💪</div>
+            <h3>Force Converter</h3>
+            <p>Convert between Newtons, Dyne, Pound-force, and more.</p>
+        </a>
+        <a href="{{ url_for('power_converter_index') }}" class="tool-card">
+            <div class="tool-icon">🔌</div>
+            <h3>Power Converter</h3>
+            <p>Convert between Watts, Horsepower, Kilowatts, and more.</p>
+        </a>
+        <a href="{{ url_for('angle_converter_index') }}" class="tool-card">
+            <div class="tool-icon">📐</div>
+            <h3>Angle Converter</h3>
+            <p>Convert between Degrees, Radians, Gradians, and more.</p>
+        </a>
+    </div>
+</section>
+
+<section id="faq-section" class="section-container">
+    <h2 class="section-heading">Frequently Asked Questions</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is this Unit Converter free to use?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Yes, our Unit Converter tool is completely free for everyone. There are no hidden charges or subscription fees. You can use it as many times as you want.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>How accurate are the conversions?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Our converters are designed to provide highly accurate results based on standard conversion rates. We strive to ensure precision for all your needs.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Can I convert any unit type?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>We offer a comprehensive range of unit types including Length, Weight, Temperature, Area, Volume, Time, and Age. We are continuously adding more tools.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is the website mobile-friendly?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Absolutely! Our website is fully responsive, meaning it's optimized for seamless use on all devices, including desktops, tablets, and mobile phones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/digital_storage_converter.js') }}"></script>

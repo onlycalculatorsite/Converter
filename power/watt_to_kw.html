@@ -1,0 +1,160 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Watt to kW Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Watt to Kilowatt (kW) with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('power_converter_index') }}" class="converter-tab-button" data-converter-type="power" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Power Home</a>
+        <a href="{{ url_for('power_specific_conversion', from_unit='kw', to_unit='watt') }}" class="converter-tab-button" data-converter-type="power-kw-watt" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">kW to Watt</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Watts:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 1000" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output (Kilowatts):</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Watt">Watt</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Kilowatt">Kilowatt</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Watt to kW Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Watt to kW converter is a fundamental tool for accurately translating power measurements from a smaller unit (Watt) to a larger, more commonly used unit (Kilowatt). This conversion is essential in electrical engineering, physics, and everyday applications like understanding electricity consumption. With its intuitive interface, you can quickly get accurate conversion amounts, ensuring precision in your calculations.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Watts and Kilowatts</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Watt?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>Watt (W)</b> is the SI unit of power, equivalent to one joule per second. It is used to quantify the rate of energy transfer.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Kilowatt (kW)?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>Kilowatt (kW)</b> is a unit of power equal to 1,000 watts. It is commonly used to express the power of engines, electric motors, and heaters.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Watts to kW?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting watts to kilowatts is useful for simplifying large power values into a more convenient format. Our converter performs this simple and accurate conversion instantly using the formula: 1 kW = 1,000 W.
+        </p>
+    </div>
+</section>
+
+<section id="faq-section" class="section-container">
+    <h2 class="section-heading">Frequently Asked Questions</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is this Unit Converter free to use?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Yes, our Unit Converter tool is completely free for everyone. There are no hidden charges or subscription fees. You can use it as many times as you want.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>How accurate are the conversions?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Our converters are designed to provide highly accurate results based on standard conversion rates. We strive to ensure precision for all your needs.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Can I convert any unit type?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>We offer a comprehensive range of unit types including Length, Weight, Temperature, Area, Volume, Time, and Age. We are continuously adding more tools.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"><h3>Is the website mobile-friendly?</h3><i class="fas fa-plus"></i></div>
+            <div class="faq-answer">
+                <p>Absolutely! Our website is fully responsive, meaning it's optimized for seamless use on all devices, including desktops, tablets, and mobile phones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/power_converter.js') }}"></script>

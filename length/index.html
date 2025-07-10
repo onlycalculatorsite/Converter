@@ -1,0 +1,416 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertify.AI - Your Ultimate Converter Hub</title>
+    <meta name="description" content="Fast, accurate, and easy-to-use online unit and age converter. Convert length, temperature, area, volume, weight, time, and calculate age instantly.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2QWDFWwBCxN5V6qG/t3bLtmG6NvwK20R8T3M2t/FfD3M5C5S5P5M5P5M5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* FAQ Section Specific Styles - Embedded Directly */
+        .faq-container {
+            background-color: var(--card-section-background); 
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-medium); 
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color); 
+        }
+
+        .faq-item:last-child .faq-question {
+            border-bottom: none;
+        }
+
+        .faq-question h3 {
+            font-size: 1.15rem;
+            margin: 0;
+            color: var(--text-dark); 
+            flex-grow: 1;
+            padding-right: 15px;
+        }
+
+        .faq-question i {
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+            color: var(--primary-button);
+        }
+
+        .faq-question.active i {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out; 
+            padding: 0 10px; 
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+
+        .faq-answer.active {
+            max-height: 50000000px; 
+            padding: 22px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}" class="nav-logo">Convertify.AI</a> <div class="nav-links" id="navLinks">
+            <a href="{{ url_for('home') }}" class="nav-link-item">Home</a> <a href="{{ url_for('home') }}#more-tools" class="nav-link-item">More Tools</a> <a href="{{ url_for('home') }}#how-to-use" class="nav-link-item">How to Use</a> <a href="{{ url_for('home') }}#why-choose-us" class="nav-link-item">Why Choose Us</a> </div>
+        <div class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+    <main>
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Length Converter</h1>
+    <p style="text-align: center; color: var(--text-light); margin-top: -20px; margin-bottom: 30px;">
+        Convert various length units quickly and accurately, or select a specific conversion below.
+    </p>
+    <div class="converter-tabs">
+        <a href="{{ url_for('currency_converter_page_index') }}" class="converter-tab-button" data-converter-type="currency">Currency</a>
+        <a href="{{ url_for('digital_storage_converter_index') }}" class="converter-tab-button" data-converter-type="digital_storage">Digital Storage</a>
+        <a href="{{ url_for('temperature_converter_index') }}" class="converter-tab-button" data-converter-type="temperature">Temperature</a>
+        <a href="{{ url_for('time_converter_index') }}" class="converter-tab-button" data-converter-type="time">Time</a>
+        <a href="{{ url_for('age_converter_index') }}" class="converter-tab-button" data-converter-type="age">Age</a>
+        </div>
+
+    <div class="converter-grid">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--text-dark);">From:</label>
+            <input type="number" id="fromUnitInput" placeholder="Enter value" style="background-color: var(--card-section-background); color: var(--text-dark); border: 1px solid var(--border-color);">
+        </div>
+        <div></div>
+        <div class="converter-select-group">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect" style="background-color: var(--card-section-background); color: var(--text-dark); border: 1px solid var(--border-color);">
+                </select>
+        </div>
+        <div class="converter-select-group">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect" style="background-color: var(--card-section-background); color: var(--text-dark); border: 1px solid var(--border-color);">
+                </select>
+        </div>
+        <br>
+        
+    </div>
+    <div class="converter-result" id="conversionResult" style="background-color: var(--primary-background); color: var(--accent-highlight); border: 2px solid var(--primary-button);">Enter value to convert</div>
+
+    <div class="search-units-section">
+        <h2 class="section-heading" style="font-size: 1.5rem; margin-bottom: 20px;">Find the Units to Convert</h2>
+        <div class="search-units-grid">
+            <div class="converter-input-group">
+                <label for="searchFromUnit" style="color: var(--text-dark);">From Unit:</label>
+                <input type="text" id="searchFromUnit" placeholder="e.g. meter" style="background-color: var(--card-section-background); color: var(--text-dark); border: 1px solid var(--border-color);">
+            </div>
+            <div class="converter-input-group">
+                <label for="searchToUnit" style="color: var(--text-dark);">To Unit:</label>
+                <input type="text" id="searchToUnit" placeholder="e.g. feet" style="background-color: var(--card-section-background); color: var(--text-dark); border: 1px solid var(--border-color);">
+            </div>
+        </div>
+        <button id="searchUnitsButton" class="primary-button" style="margin-top: 25px; width: 100%; padding: 15px; font-size: 1.2rem; background-color: var(--primary-button); color: var(--card-section-background);">Find & Set Units</button>
+        <div id="searchUnitsResultMessage" class="converter-result" style="margin-top: 15px; border: none; background: none; box-shadow: none; font-size: 1rem; min-height: unset; color: var(--text-medium);"></div>
+    </div>
+
+    <section id="important-length-conversions" class="section-container" style="padding-top: 0;">
+        <h2 class="section-heading" style="font-size: 1.8rem; margin-top: 40px;">Popular Length Conversions</h2>
+        <div class="popular-conversions-grid">
+            <a href="{{ url_for('length_specific_conversion', from_unit='meter', to_unit='feet') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">📏</div>
+                    <h3>Meter to Feet</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='feet', to_unit='meter') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🚶</div>
+                    <h3>Feet to Meter</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='inches', to_unit='cm') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">📐</div>
+                    <h3>Inches to CM</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='cm', to_unit='inches') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">📏</div>
+                    <h3>CM to Inches</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='kilometer', to_unit='miles') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🛣️</div>
+                    <h3>Kilometer to Miles</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='miles', to_unit='kilometer') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🚗</div>
+                    <h3>Miles to Kilometer</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='mm', to_unit='inches') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🤏</div>
+                    <h3>MM to Inches</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='inches', to_unit='mm') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">📏</div>
+                    <h3>Inches to MM</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='light_year', to_unit='kilometers') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🌌</div>
+                    <h3>Light Year to Kilometers</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='kilometers', to_unit='light_year') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🚀</div>
+                    <h3>Kilometers to Light Year</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='light_year', to_unit='miles') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">💫</div>
+                    <h3>Light Year to Miles</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='miles', to_unit='light_year') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">✨</div>
+                    <h3>Miles to Light Year</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='nautical_mile', to_unit='kilometers') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🚢</div>
+                    <h3>Nautical Miles to Kilometers</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='kilometers', to_unit='nautical_mile') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">✈️</div>
+                    <h3>Kilometers to Nautical Miles</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='nautical_mile', to_unit='miles') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">⛵</div>
+                    <h3>Nautical Miles to Miles</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+            <a href="{{ url_for('length_specific_conversion', from_unit='miles', to_unit='nautical_mile') }}" class="conversion-card">
+                <div class="card-content">
+                    <div class="card-icon">🌊</div>
+                    <h3>Miles to Nautical Miles</h3>
+                </div>
+                <div class="card-arrow">›</div>
+            </a>
+        </div>
+    </section>
+
+    <section id="why-choose-us" class="section-container">
+        <h2 class="section-heading">Why Choose Our Converters?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast & Accurate</h3>
+                <p>Get instant and precise results for all your conversion needs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👍</div>
+                <h3>User-Friendly Interface</h3>
+                <p>Our intuitive design makes conversions effortless for everyone.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Comprehensive Tools</h3>
+                <p>A wide array of unit and age converters at your fingertips.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Always Free</h3>
+                <p>Access all our powerful conversion tools completely free of charge.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-to-use" class="section-container">
+        <h2 class="section-heading">How to Use Our Converters</h2>
+        <div class="how-to-use-content">
+            <h3>Get Started in Seconds!</h3>
+            <ol>
+                <li><b>Select Conversion Type:</b> Choose the type of conversion you need from the tabs at the top (e.g., Length, Weight, Temperature).</li>
+                <li><b>Choose Units:</b> Select your desired "From" and "To" units from the dropdown menus.</li>
+                <li><b>Enter Value:</b> Type the value you wish to convert into the "From" input field.</li>
+                <li><b>View Result:</b> The converted result will automatically appear in the "To" field.</li>
+                <li><b>Explore More:</b> Check out our "More Tools" section below for other useful converters!</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="more-tools" class="section-container">
+        <h2 class="section-heading">Explore More Converters</h2>
+        <div class="tools-grid">
+            <a href="{{ url_for('length_converter_index') }}" class="tool-card">
+                <div class="tool-icon">📏</div>
+                <h3>Length Converter</h3>
+                <p>Convert between meters, miles, inches, and more.</p>
+            </a>
+            <a href="{{ url_for('temperature_converter_index') }}" class="tool-card">
+                <div class="tool-icon">🌡️</div>
+                <h3>Temperature Converter</h3>
+                <p>Convert between Celsius, Fahrenheit, and Kelvin.</p>
+            </a>
+            <a href="{{ url_for('area_converter_index') }}" class="tool-card">
+                <div class="tool-icon">🔳</div>
+                <h3>Area Converter</h3>
+                <p>Convert between square meters, acres, hectares, and more.</p>
+            </a>
+            <a href="{{ url_for('volume_converter_index') }}" class="tool-card">
+                <div class="tool-icon">📦</div>
+                <h3>Volume Converter</h3>
+                <p>Convert between liters, gallons, cubic meters, and various liquid units.</p>
+            </a>
+            <a href="{{ url_for('weight_converter_index') }}" class="tool-card">
+                <div class="tool-icon">⚖️</div>
+                <h3>Weight Converter</h3><br>
+                <p>Convert between kilograms, pounds, ounces, and other mass units.</p>
+            </a>
+            <a href="{{ url_for('time_converter_index') }}" class="tool-card">
+                <div class="tool-icon">⏰</div>
+                <h3>Time Converter</h3>
+                <p>Convert between seconds, minutes, hours, days, weeks, and years.</p>
+            </a>
+            <a href="{{ url_for('age_converter_index') }}" class="tool-card">
+                <div class="tool-icon">🎂</div>
+                <h3>Age Converter</h3>
+                <p>Calculate your age in years, months, days, hours, and even seconds!</p>
+            </a>
+            <a href="{{ url_for('currency_converter_page_index') }}" class="tool-card">
+                <div class="tool-icon">💲</div>
+                <h3>Currency Converter</h3>
+                <p>Convert global currencies with live exchange rates.</p>
+            </a>
+            <a href="{{ url_for('speed_converter_index') }}" class="tool-card">
+                <div class="tool-icon">🏃</div>
+                <h3>Speed Converter</h3>
+                <p>Convert between km/h, mph, m/s, and knots.</p>
+            </a>
+            <a href="{{ url_for('digital_storage_converter_index') }}" class="tool-card">
+                <div class="tool-icon">💾</div>
+                <h3>Digital Storage Converter</h3>
+                <p>Convert between bits, bytes, KB, MB, GB, TB, and more.</p>
+            </a>
+            <a href="{{ url_for('energy_converter_index') }}" class="tool-card">
+                <div class="tool-icon">⚡</div>
+                <h3>Energy Converter</h3>
+                <p>Convert between Joules, Calories, kWh, Electron Volts, and more.</p>
+            </a>
+            <a href="{{ url_for('frequency_converter_index') }}" class="tool-card">
+                <div class="tool-icon">〰️</div>
+                <h3>Frequency Converter</h3>
+                <p>Convert between Hertz, Kilohertz, Megahertz, Gigahertz, and more.</p>
+            </a>
+            <a href="{{ url_for('pressure_converter_index') }}" class="tool-card">
+                <div class="tool-icon"> แรงดัน </div>
+                <h3>Pressure Converter</h3>
+                <p>Convert between Pascals, PSI, Bar, Atmosphere, and more.</p>
+            </a>
+            <a href="{{ url_for('force_converter_index') }}" class="tool-card">
+                <div class="tool-icon">💪</div>
+                <h3>Force Converter</h3>
+                <p>Convert between Newtons, Dyne, Pound-force, and more.</p>
+            </a>
+            <a href="{{ url_for('power_converter_index') }}" class="tool-card">
+                <div class="tool-icon">🔌</div>
+                <h3>Power Converter</h3>
+                <p>Convert between Watts, Horsepower, Kilowatts, and more.</p>
+            </a>
+            <a href="{{ url_for('angle_converter_index') }}" class="tool-card">
+                <div class="tool-icon">📐</div>
+                <h3>Angle Converter</h3>
+                <p>Convert between Degrees, Radians, Gradians, and more.</p>
+            </a>
+            <a href="{{ url_for('density_converter_index') }}" class="tool-card">
+                <div class="tool-icon">🏋️‍♀️</div>
+                <h3>Density Converter</h3>
+                <p>Convert between kg/m³, g/cm³, and more.</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="faq-section" class="section-container">
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question"><h3>Is this Unit Converter free to use?</h3><i class="fas fa-plus"></i></div>
+                <div class="faq-answer">
+                    <p>Yes, our Unit Converter tool is completely free for everyone. There are no hidden charges or subscription fees. You can use it as many times as you want.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"><h3>How accurate are the conversions?</h3><i class="fas fa-plus"></i></div>
+                <div class="faq-answer">
+                    <p>Our converters are designed to provide highly accurate results based on standard conversion rates. We strive to ensure precision for all your needs.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"><h3>Can I convert any unit type?</h3><i class="fas fa-plus"></i></div>
+                <div class="faq-answer">
+                    <p>We offer a comprehensive range of unit types including Length, Weight, Temperature, Area, Volume, Time, and Age. We are continuously adding more tools.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question"><h3>Is the website mobile-friendly?</h3><i class="fas fa-plus"></i></div>
+                <div class="faq-answer">
+                    <p>Absolutely! Our website is fully responsive, meaning it's optimized for seamless use on all devices, including desktops, tablets, and mobile phones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>

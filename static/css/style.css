@@ -1,0 +1,972 @@
+/* General Styles */
+:root {
+    --primary-background: #F4EEE0; /* Light Beige — Soft, clean background */
+    --card-section-background: #FFFFFF; /* Pure White — Standard input/card background */
+    --primary-button: #D9480F; /* Burnt Orange — For main actions like "Convert" */
+    --secondary-button: #C2B9A6; /* Taupe Grey — For "Reset", etc. */
+    --accent-highlight: #A63D1F; /* Dark Rust — On hover/focus or labels, headings */
+    --text-dark: #000000; /* Black — Clear and readable text */
+    --text-medium: #333333; /* Charcoal gray - for perfect readability, used for main text */
+    --text-light: #777777; /* Muted gray — Subtle and soft on eyes, for secondary text/labels/small info */
+    --border-color: #E0D8C2; /* Soft Sand — Light borders */
+    --error-color: #D32F2F; /* Muted soft red — noticeable without being harsh */
+
+    /* Previous variables being remapped or removed to avoid conflicts */
+    /* REMAP: */
+    --primary-dark: var(--primary-background); /* Body background */
+    --accent-green: var(--primary-button); /* Replaced with primary button color */
+    --light-accent: var(--text-light); /* Used for lighter text details */
+    --highlight-text: var(--accent-highlight); /* For important text/headings */
+    --input-bg: var(--card-section-background); /* Input field background */
+    --input-border-focus: var(--accent-highlight); /* Focus border for inputs */
+    --card-background-dark: var(--card-section-background); /* Section/Card background */
+    --footer-bottom-bg: var(--accent-highlight); /* Example: Could be accent-highlight or primary-button */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Recommended font from user context */
+    background-color: var(--primary-background);
+    color: var(--text-medium); /* Main text color for body */
+    line-height: 1.6;
+}
+
+a {
+    color: var(--primary-button); /* Links generally use primary accent */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-highlight); /* Links on hover */
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.section-heading {
+    text-align: center;
+    color: var(--accent-highlight); /* Section titles/headings */
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-button); /* Underline for headings */
+    border-radius: 5px;
+}
+
+/* Header */
+nav {
+    background-color: var(--card-section-background); /* White background for nav */
+    color: var(--text-dark); /* Dark text for nav items */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-highlight); /* Logo color */
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: var(--text-medium); /* Default nav link color */
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-highlight); /* Underline on hover/active */
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-button); /* Nav link hover/active color */
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+    background-color: var(--primary-button); /* Underline for hover/active */
+}
+
+.nav-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-dark); /* Mobile nav toggle color */
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    nav {
+        position: relative;
+        top: auto;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--card-section-background); /* Mobile nav background */
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color); /* Mobile nav item border */
+        color: var(--text-medium); /* Mobile nav item color */
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary-button); /* Mobile nav item hover color */
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+}
+
+/* Main Converter Section */
+.converter-section {
+    background-color: var(--card-section-background); /* Main section background */
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    border: 1px solid var(--border-color); /* Section border */
+}
+
+.converter-section p {
+    text-align: center;
+    color: var(--text-light); /* Section description text color */
+    margin-top: -20px;
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+}
+
+.converter-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: var(--primary-background); /* Tabs section background */
+    padding: 8px; /* Adjusted padding for the container */
+    border-radius: 8px;
+    border: 1px solid var(--border-color); /* Tabs section border */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.converter-tab-button {
+    /* Base styles - specific overrides in a.converter-tab-button below */
+    background-color: var(--primary-background); 
+    color: var(--text-dark); 
+    border: 1px solid var(--border-color); 
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    flex-grow: 1; 
+    flex-shrink: 1; 
+    flex-basis: auto; 
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.converter-tabs a.converter-tab-button {
+    /* These specific styles will take precedence for anchor tags acting as buttons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    /* Ensure colors are consistent with variables */
+    background-color: var(--primary-background);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+
+    padding: 10px 18px; /* Adjusted padding */
+    font-size: 1.3rem; /* USER'S REQUEST: KEPT FONT SIZE AT 1.3rem */
+    max-width: 250px; /* INCREASED max-width significantly to prevent wrapping at 1.3rem */
+    min-width: 100px; /* Ensures minimum size for smaller labels */
+    white-space: nowrap; /* Force text to stay on a single line */
+}
+
+.converter-tab-button:hover,
+.converter-tabs a.converter-tab-button:hover {
+    background-color: var(--secondary-button); /* Tab button hover background */
+    color: var(--text-dark); /* Tab button hover text color */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.converter-tab-button.active,
+.converter-tabs a.converter-tab-button.active {
+    background-color: var(--primary-button); /* Active tab button background */
+    color: var(--card-section-background); /* Active tab button text color (white) */
+    font-weight: 700;
+    box-shadow: 0 0 0 2px var(--primary-button), 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+}
+
+.converter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Added for output group to match input group styling structure */
+.converter-output-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.converter-input-group label,
+.converter-select-group label,
+.converter-output-group label { /* Added output group label */
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-dark); /* Label text color */
+}
+
+.converter-input-group input[type="number"],
+.converter-select-group select,
+.search-units-grid input[type="text"],
+#dobInput {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--border-color); /* Input border */
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    color: var(--text-dark); /* Input text color */
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.converter-input-group input[type="number"]::placeholder,
+.search-units-grid input[type="text"]::placeholder,
+#dobInput::placeholder {
+    color: var(--text-light); /* Placeholder color */
+}
+
+.converter-input-group input[type="number"]:focus,
+.converter-select-group select:focus,
+.search-units-grid input[type="text"]:focus,
+#dobInput:focus {
+    outline: none;
+    border-color: var(--accent-highlight); /* Input focus border */
+    box-shadow: 0 0 0 4px rgba(166, 61, 31, 0.2); /* Soft shadow on focus */
+}
+
+/* Custom dropdown arrow for select */
+.converter-select-group {
+    position: relative;
+}
+.converter-select-group select {
+    padding-right: 40px;
+}
+.converter-select-group::after {
+    content: '▼';
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dark); /* Dropdown arrow color */
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+.converter-result {
+    /* Adjusted for individual specific conversion pages */
+    /* These styles might be overridden by inline styles in HTML for specific pages */
+    background-color: var(--primary-background); /* Result background */
+    color: var(--accent-highlight); /* Result text color */
+    border: 2px solid var(--primary-button); /* Result border */
+    font-size: 1.5rem; /* Smaller font size as per request */
+    padding: 10px 15px; /* Reduced padding as per request */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    min-height: auto;
+    height: auto; /* Ensure it doesn't stretch */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    grid-column: span 1; /* Ensure it takes 1 column in grid if not explicitly set in HTML */
+}
+
+/* Error Message Specific Styling */
+.error-message {
+    color: var(--error-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Search Units Section */
+.search-units-section {
+    background-color: var(--primary-background); /* Search section background */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    border: 1px solid var(--border-color); /* Search section border */
+}
+
+.search-units-section .section-heading {
+    color: var(--accent-highlight); /* Search section heading color */
+    margin-bottom: 25px;
+}
+.search-units-grid .converter-input-group label {
+    color: var(--text-dark); /* Search labels color */
+}
+
+
+/* --- Why Choose Us (Features Grid) --- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Changed to 4 equal columns for desktop */
+    gap: 25px;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.feature-card {
+    background-color: var(--card-section-background); /* Card background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid var(--border-color); /* Card border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 3rem; /* Larger icon for impact */
+    margin-bottom: 15px;
+    color: var(--primary-button); /* Feature icons color */
+}
+
+.feature-card h3 {
+    color: var(--accent-highlight); /* Feature card titles */
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: var(--text-medium); /* Feature card descriptions */
+    font-size: 0.95rem;
+}
+
+
+/* --- More Tools (Tools Grid) --- */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Changed to 4 equal columns for desktop */
+    gap: 25px;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 992px) { /* Medium screens ke liye */
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns remain same for tablets */
+    }
+}
+
+@media (max-width: 768px) { /* Small screens (mobile) ke liye */
+    .tools-grid {
+        grid-template-columns: 1fr; /* 1 column remains same for mobile */
+    }
+}
+
+.tool-card {
+    background-color: var(--card-section-background); /* Tool card background */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid var(--border-color); /* Tool card border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Space out content vertically */
+    min-height: 180px; /* Ensure consistent height for aesthetic */
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tool-icon {
+    font-size: 2.5rem; /* Standard icon size */
+    margin-bottom: 10px;
+    color: var(--primary-button); /* Tool icons color */
+}
+
+.tool-card h3 {
+    color: var(--accent-highlight); /* Tool card titles */
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.tool-card p {
+    color: var(--text-medium); /* Tool card descriptions */
+    font-size: 0.9rem;
+}
+
+
+/* How to Use & FAQ */
+.how-to-use-content,
+.faq-container {
+    background-color: var(--card-section-background); /* Background for these sections */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color); /* Border for these sections */
+    color: var(--text-medium); /* Text color inside these sections */
+}
+
+.how-to-use-content h3 {
+    color: var(--accent-highlight); /* Heading inside how-to-use */
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.how-to-use-content ol {
+    list-style: decimal;
+    padding-left: 25px;
+}
+
+.how-to-use-content li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color); /* FAQ question border */
+}
+
+.faq-item:last-child .faq-question {
+    border-bottom: none;
+}
+
+.faq-question h3 {
+    font-size: 1.15rem;
+    margin: 0;
+    color: var(--text-dark); /* FAQ question text color */
+    flex-grow: 1;
+    padding-right: 15px;
+}
+
+.faq-question i {
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+    color: var(--primary-button); /* FAQ icon color */
+}
+
+.faq-question.active i {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding: 0 10px;
+    color: var(--text-medium); /* FAQ answer text color */
+    font-size: 0.95rem;
+}
+
+.faq-answer.active {
+    max-height: 50000px;
+    padding: 0px;
+}
+
+/* Blog Section Styles */
+.blog-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Auto-fit for responsiveness */
+    gap: 30px; /* Space between blog cards */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.blog-card {
+    background-color: var(--card-section-background); /* White background for blog cards */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    overflow: hidden; /* Ensures image corners are rounded with card */
+    display: flex;
+    flex-direction: column; /* Stack image and content vertically */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color); /* Light border for definition */
+}
+
+.blog-card:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.blog-card-image {
+    width: 100%;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Cover ensures images fill the space without distortion */
+    display: block; /* Remove extra space below image */
+}
+
+.blog-card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows content to expand and push footer down if needed */
+}
+
+.blog-card-content h3 {
+    font-size: 1.35rem; /* Larger font for blog titles */
+    color: var(--accent-highlight); /* Blog title color */
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.blog-card-content p {
+    font-size: 0.95rem;
+    color: var(--text-medium); /* Blog description text color */
+    margin-bottom: 15px;
+    flex-grow: 1; /* Allows paragraph to take available space */
+}
+
+.blog-card .read-more {
+    color: var(--primary-button); /* Read More link color */
+    font-weight: 600;
+    text-align: right; /* Align to the right as per summarizer.org */
+    display: block;
+    transition: color 0.2s ease;
+}
+
+.blog-card .read-more:hover {
+    color: var(--secondary-button); /* Read More link hover color */
+}
+
+/* Individual Blog Post Page Styles */
+.blog-post-content {
+    background-color: var(--card-section-background);
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    border: 1px solid var(--border-color);
+}
+
+.blog-post-content h1 {
+    font-size: 2.5rem;
+    color: var(--accent-highlight);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.blog-post-content .blog-meta {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+.blog-post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-post-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    text-align: justify;
+}
+
+.blog-post-content h2 {
+    font-size: 1.8rem;
+    color: var(--accent-highlight);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+    margin-bottom: 20px;
+    padding-left: 25px;
+    color: var(--text-medium);
+}
+
+.blog-post-content ul li,
+.blog-post-content ol li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--card-section-background); /* Footer background */
+    color: var(--text-dark); /* Default text color in footer */
+    padding-top: 40px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-color); /* Footer separator */
+}
+
+.footer-column h4 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: var(--accent-highlight); /* Footer column titles */
+}
+
+.footer-column p {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: var(--text-medium); /* Footer paragraph text */
+}
+
+.footer-logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-highlight); /* Footer logo color */
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo .logo-icon {
+    height: 35px;
+    margin-right: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: var(--text-medium); /* Footer link color */
+    font-size: 0.95rem;
+}
+
+.footer-column ul li a:hover {
+    color: var(--primary-button); /* Footer link hover color */
+}
+
+.contact-info a {
+    color: var(--text-medium); /* Contact info link color */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.contact-info a i {
+    color: var(--text-medium); /* Contact info icon color */
+}
+
+.language-selector select {
+    background-color: var(--primary-background); /* Language selector background */
+    color: var(--text-dark); /* Language selector text color */
+    border: 1px solid var(--border-color); /* Language selector border */
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.footer-bottom {
+    background-color: var(--accent-highlight); /* Footer bottom background */
+    padding: 20px;
+    text-align: center;
+    color: var(--card-section-background); /* Footer bottom text color (white) */
+    font-size: 0.85rem;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 18px;
+}
+
+.social-icons a {
+    color: var(--card-section-background); /* Social icons color (white on accent-highlight bg) */
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary-button); /* Social icons hover color */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .converter-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .blog-cards-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .section-container {
+        padding: 30px 15px;
+    }
+
+    .section-heading {
+        font-size: 1.8rem;
+    }
+
+    .converter-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .converter-tab-button {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        max-width: none;
+    }
+
+    .converter-input-group input[type="number"],
+    .converter-select-group select,
+    .search-units-grid input[type="text"],
+    #dobInput {
+        padding: 10px 12px;
+        font-size: 1rem;
+    }
+    .converter-result {
+        font-size: 1.5rem;
+        padding: 18px;
+    }
+
+    .search-units-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Yahan features-grid ke liye media queries add / theek kar diye gaye hain */
+    .features-grid { /* Is section ko update karna hai */
+        grid-template-columns: 1fr;
+    }
+    .blog-cards-grid {
+        grid-template-columns: 1fr; /* Single column for mobile screens */
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+    }
+    .footer-logo {
+        justify-content: center;
+    }
+    .footer-column {
+        text-align: center;
+    }
+    .footer-column ul {
+        padding: 0;
+    }
+    .footer-column ul li {
+        margin-bottom: 5px;
+    }
+}
+
+.primary-button {
+    background-color: var(--primary-button); /* Primary button background */
+    color: var(--card-section-background); /* Primary button text color (white) */
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.primary-button:hover {
+    background-color: var(--accent-highlight); /* Primary button hover background */
+    color: var(--card-section-background); /* Primary button hover text color */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+#searchUnitsResultMessage {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+#searchUnitsResultMessage.error-message {
+    color: var(--error-color);
+}
+
+/* Custom Styles for Popular Conversions Grid */
+.popular-conversions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* 3 columns for desktop, responsive */
+    gap: 15px; /* Adjust gap as needed */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Individual Conversion Card Styling */
+.conversion-card {
+    background-color: var(--card-section-background); /* White background */
+    border: 1px solid var(--border-color); /* Light border */
+    border-radius: 8px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align content left, arrow right */
+    text-decoration: none;
+    color: var(--text-dark); /* Default text color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    transition: all 0.2s ease-in-out;
+}
+
+.conversion-card:hover {
+    background-color: var(--primary-background); /* Light beige on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.conversion-card .card-content {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+}
+
+.conversion-card .card-icon {
+    font-size: 1.8rem; /* Icon size */
+    color: var(--primary-button); /* Icon color */
+    line-height: 1; /* Adjust line height for better alignment */
+}
+
+.conversion-card h3 {
+    font-size: 1.1rem; /* Text size for conversion name */
+    color: var(--text-dark); /* Text color */
+    margin: 0; /* Remove default margin */
+}
+
+.conversion-card .card-arrow {
+    font-size: 1.5rem; /* Arrow size */
+    color: var(--text-light); /* Muted arrow color */
+    font-weight: bold;
+}
+
+/* Responsive adjustments for popular-conversions-grid */
+@media (max-width: 992px) {
+    .popular-conversions-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust columns for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .popular-conversions-grid {
+        grid-template-columns: 1fr; /* Single column for mobile */
+    }
+    .conversion-card {
+        padding: 12px 15px; /* Adjust padding for smaller screens */
+    }
+    .conversion-card .card-icon {
+        font-size: 1.5rem; /* Smaller icon size for mobile */
+    }
+    .conversion-card h3 {
+        font-size: 1rem; /* Smaller text size for mobile */
+    }
+    .conversion-card .card-arrow {
+        font-size: 1.2rem; /* Smaller arrow size for mobile */
+    }
+}

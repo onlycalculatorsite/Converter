@@ -1,0 +1,137 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Feet to Meter Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Feet to Meter with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('length_converter_index') }}" class="converter-tab-button" data-converter-type="length" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Length Home</a>
+        <a href="{{ url_for('length_specific_conversion', from_unit='meter', to_unit='feet') }}" class="converter-tab-button" data-converter-type="length-meter-feet" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Meter to Feet</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Feet:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 10" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output:</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Foot">Foot</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Meter">Meter</option>
+            </select>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+    
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Feet to Meter Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Our Feet to Meter Converter is a simple yet powerful tool designed to help you accurately translate lengths from the imperial system to the metric system. This conversion is frequently needed in various fields, including construction, architecture, sports, and international trade, where measurements often differ. With a user-friendly interface, our converter provides instant and precise results, ensuring your calculations are always spot-on. Whether you're dealing with building plans, athletic records, or personal measurements, rely on our efficient tool to seamlessly convert feet to meters, making your work easier and more accurate.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Feet and Meters</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Foot?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            The <b>foot (ft)</b> is a unit of length in the imperial and U.S. customary systems of measurement. Historically, it was based on the length of a human foot, but its exact length has varied over time and across different regions. Currently, the international foot is defined as exactly 0.3048 meters. It is predominantly used in the United States, Canada (alongside meters for some applications), and the United Kingdom (though officially metricated, feet are still common in informal use, especially for height and altitude). Other countries may use it for specific purposes like aviation.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Meter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            The <b>meter (m)</b> is the base unit of length in the International System of Units (SI), which is the modern form of the metric system. Historically, it was defined in terms of the Earth's circumference. Today, it's precisely defined as the length of the path travelled by light in vacuum during a time interval of 1/299,792,458 of a second. This universal standard makes the meter highly accurate and consistent for scientific, engineering, and everyday measurements across most of the world. It is widely used in countries that have adopted the metric system for everything from road distances to fabric lengths.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Feet to Meters?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting feet to meters is a frequent requirement due to the global diversity in measurement systems. This conversion is crucial for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>International Projects:</b> Collaborating on projects where one party uses imperial units (feet) and the other uses metric (meters).</li>
+                <li><b>Scientific Research:</b> Standardizing data from various sources to a common metric system.</li>
+                <li><b>Manufacturing and Design:</b> Ensuring compatibility between components designed in different unit systems.</li>
+                <li><b>Personal Use:</b> Converting personal height or room dimensions for international audiences or product specifications.</li>
+                <li><b>Education:</b> Learning about and applying different measurement systems in academic contexts.</li>
+            </ul>
+            Our Feet to Meter converter provides a reliable and instant solution for these needs, converting 1 foot to exactly 0.3048 meters. This tool ensures accuracy and saves you the effort of manual calculations, allowing for seamless communication and precise application of measurements across global standards.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>

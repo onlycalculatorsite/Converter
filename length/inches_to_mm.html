@@ -1,0 +1,137 @@
+{% include 'header.html' %}
+
+<section id="main-converter-section" class="section-container converter-section">
+    <h1 class="section-heading">Inches to Millimeter Converter</h1>
+    <p style="text-align: center; color: var(--text-medium); margin-top: -20px; margin-bottom: 30px; font-size: 1.05rem;">
+        Convert values from Inches to Millimeter with ease and precision.
+    </p>
+    
+    <div class="converter-tabs" style="margin-bottom: 40px;">
+        <a href="{{ url_for('length_converter_index') }}" class="converter-tab-button" data-converter-type="length" style="background-color: var(--primary-button); color: var(--card-section-background); border: 1px solid var(--primary-button);">Length Home</a>
+        <a href="{{ url_for('length_specific_conversion', from_unit='mm', to_unit='inches') }}" class="converter-tab-button" data-converter-type="length-mm-inches" style="background-color: var(--secondary-button); color: var(--text-dark); border: 1px solid var(--secondary-button);">Millimeter to Inches</a>
+    </div>
+
+    <div class="converter-grid" style="gap: 30px;">
+        <div class="converter-input-group">
+            <label for="fromUnitInput" style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Enter Inches:</label>
+            <input type="number" id="fromUnitInput" placeholder="e.g. 10" style="
+                background-color: var(--card-section-background); 
+                color: var(--text-dark); 
+                border: 2px solid var(--primary-button);
+                padding: 14px 18px;
+                font-size: 1.2rem;
+                box-shadow: 0 0 10px rgba(106, 27, 154, 0.05);
+                width: 100%;
+                border-radius: 8px;
+            ">
+        </div>
+        <br> <div class="converter-output-group">
+            <label style="color: var(--accent-highlight); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;">Output:</label>
+            <div class="converter-result" id="conversionResult" style="
+                background-color: var(--primary-background);
+                color: var(--accent-highlight);
+                border: 2px solid var(--primary-button);
+                font-size: 1.5rem;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                min-height: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                0.00
+            </div>
+        </div>
+
+        <div class="converter-select-group" style="display: none;">
+            <label for="fromUnitSelect" style="color: var(--text-dark);">Select From Unit:</label>
+            <select id="fromUnitSelect">
+                <option value="Inch">Inch</option>
+            </select>
+        </div>
+        <div class="converter-select-group" style="display: none;">
+            <label for="toUnitSelect" style="color: var(--text-dark);">Select To Unit:</label>
+            <select id="toUnitSelect">
+                <option value="Millimeter">Millimeter</option>
+            </select>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="resetInputButton" class="primary-button" style="background-color: var(--secondary-button); color: var(--text-dark);">Reset</button>
+    </div>
+
+    <div class="search-units-section" style="display: none;">
+    </div>
+</section>
+
+<section id="about-converter-section" class="section-container">
+    <h2 class="section-heading">About Our Inches to Millimeter Converter</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <p style="color: var(--text-medium); text-align: left;">
+            Welcome to our precise Inches to Millimeter Converter, an essential tool for transforming measurements between the imperial and metric systems. This conversion is crucial in fields like engineering, manufacturing, graphic design, and even everyday DIY projects where extreme precision is required. Inches, a standard in the U.S. customary system, often need to be converted to millimeters, a finer unit in the metric system, for international compatibility and detailed specifications. Our converter simplifies this technical conversion, providing instant and accurate results, ensuring your projects meet exact requirements without manual errors.
+        </p>
+    </div>
+</section>
+
+<section id="why-choose-us" class="section-container">
+    <h2 class="section-heading">Why Choose Our Converters?</h2>
+    <div class="features-grid">
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">⚡</div>
+            <h3 style="color: var(--accent-highlight);">Fast & Accurate</h3>
+            <p style="color: var(--text-medium);">Get instant and precise results for all your conversion needs.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">👍</div>
+            <h3 style="color: var(--accent-highlight);">User-Friendly Interface</h3>
+            <p style="color: var(--text-medium);">Our intuitive design makes conversions effortless for everyone.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">🔧</div>
+            <h3 style="color: var(--accent-highlight);">Comprehensive Tools</h3>
+            <p style="color: var(--text-medium);">A wide array of unit and age converters at your fingertips.</p>
+        </div>
+        <div class="feature-card" style="background-color: var(--card-section-background); border: 1px solid var(--border-color);">
+            <div class="feature-icon" style="color: var(--primary-button);">💰</div>
+            <h3 style="color: var(--accent-highlight);">Always Free</h3>
+            <p style="color: var(--text-medium);">Access all our powerful conversion tools completely free of charge.</p>
+        </div>
+    </div>
+</section>
+
+<section id="unit-info-section" class="section-container">
+    <h2 class="section-heading">Understanding Inches and Millimeters</h2>
+    <div class="info-card" style="background-color: var(--card-section-background); padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is an Inch?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            An <b>inch (in)</b> is a unit of length in the imperial and U.S. customary systems of measurement. Historically derived from the width of a human thumb, it is now precisely defined as 2.54 centimeters. The inch is commonly used in the United States, Canada, and the United Kingdom for a variety of measurements, including screen sizes, tire dimensions, and some construction materials. Its widespread use in these regions makes conversions to and from metric units like millimeters a frequent necessity for international compatibility and understanding.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">What is a Millimeter?</h3>
+        <p style="color: var(--text-medium); text-align: left; margin-bottom: 20px;">
+            A <b>millimeter (mm)</b> is a unit of length in the metric system, equal to one thousandth of a meter. It's a very small unit, ideal for precise measurements in engineering, manufacturing, and science. The millimeter is a fundamental unit in technical drawings and specifications worldwide due to its precision and ease of use within the decimal metric system. Its fine granularity makes it indispensable for components that require tight tolerances and accurate fitting, ensuring global consistency in detailed designs and production.
+        </p>
+
+        <h3 style="color: var(--accent-highlight); margin-bottom: 15px;">Why Convert Inches to Millimeters?</h3>
+        <p style="color: var(--text-medium); text-align: left;">
+            Converting inches to millimeters is a common requirement in industries and applications that demand high precision and international compatibility. This conversion is crucial for:
+            <ul style="color: var(--text-medium); text-align: left; margin-left: 20px; margin-top: 10px; list-style-type: disc;">
+                <li><b>Engineering and Manufacturing:</b> Designing and producing parts that are used globally, where specifications might switch between imperial and metric units.</li>
+                <li><b>CAD Software:</b> Working with design files where dimensions are provided in inches but need to be precisely rendered or manufactured in millimeters.</li>
+                <li><b>Tooling and Machining:</b> Selecting the correct drill bit, wrench, or other tools that are often standardized in millimeters, even if initial measurements are in inches.</li>
+                <li><b>Science and Research:</b> Documenting experimental setups or material properties where data needs to be in a universally recognized metric format.</li>
+                <li><b>DIY and Hobbies:</b> Following international plans or instructions for complex models, electronics, or crafts that require exact measurements.</li>
+            </ul>
+            Our Inches to Millimeter converter provides an accurate and instant solution for these needs, converting 1 inch to exactly 25.4 millimeters. This tool ensures accuracy and saves you the effort of manual calculations, allowing for seamless communication and precise application of measurements across global standards.
+        </p>
+    </div>
+</section>
+
+{% include 'footer.html' %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/length_converter.js') }}"></script>
